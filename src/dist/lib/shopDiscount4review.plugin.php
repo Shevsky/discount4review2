@@ -1,6 +1,6 @@
 <?php
 
-class shopDiscount4ReviewPlugin extends shopPlugin
+class shopDiscount4reviewPlugin extends shopPlugin
 {
 	const APP_ID = 'shop';
 	const PLUGIN_ID = 'discount4review';

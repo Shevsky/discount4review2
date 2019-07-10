@@ -10,9 +10,9 @@ class shopDiscount4ReviewContext
 	private static $self;
 
 	/**
-	 * @param shopDiscount4ReviewPlugin $plugin
+	 * @param shopDiscount4reviewPlugin $plugin
 	 */
-	public function __construct(shopDiscount4ReviewPlugin $plugin)
+	public function __construct(shopDiscount4reviewPlugin $plugin)
 	{
 		$this->plugin = $plugin;
 	}
@@ -24,7 +24,7 @@ class shopDiscount4ReviewContext
 	{
 		if (!isset(self::$self))
 		{
-			self::$self = new self(shopDiscount4ReviewPlugin::getInstance());
+			self::$self = new self(shopDiscount4reviewPlugin::getInstance());
 		}
 
 		return self::$self;
