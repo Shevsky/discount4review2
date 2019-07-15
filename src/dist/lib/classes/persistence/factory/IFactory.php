@@ -1,10 +1,12 @@
 <?php
 
-interface shopDiscount4ReviewIFactory
+namespace Discount4Review;
+
+interface IFactory
 {
 	/**
 	 * @param mixed $identify_key
-	 * @return shopDiscount4ReviewIProduct
+	 * @return Product\IProduct
 	 */
 	public function createProduct($identify_key);
 }

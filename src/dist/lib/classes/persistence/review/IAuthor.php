@@ -1,6 +1,8 @@
 <?php
 
-interface shopDiscount4ReviewIReviewAuthor
+namespace Discount4Review\Review;
+
+interface IAuthor
 {
 	/**
 	 * @return int

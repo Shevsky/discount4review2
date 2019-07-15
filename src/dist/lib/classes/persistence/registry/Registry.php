@@ -1,22 +1,24 @@
 <?php
 
-class shopDiscount4ReviewRegistry
+namespace Discount4Review;
+
+class Registry
 {
 	private $factory;
 
 	private $products = [];
 
 	/**
-	 * @param shopDiscount4ReviewIFactory $factory
+	 * @param IFactory $factory
 	 */
-	public function __construct(shopDiscount4ReviewIFactory $factory)
+	public function __construct(IFactory $factory)
 	{
 		$this->factory = $factory;
 	}
 
 	/**
 	 * @param mixed $identify_key
-	 * @return shopDiscount4ReviewIProduct
+	 * @return Product\IProduct
 	 */
 	public function getProduct($identify_key)
 	{

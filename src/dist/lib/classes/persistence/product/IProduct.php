@@ -1,6 +1,10 @@
 <?php
 
-interface shopDiscount4ReviewIProduct
+namespace Discount4Review\Product;
+
+use Discount4Review\Review\IReview;
+
+interface IProduct
 {
 	/**
 	 * @return int
@@ -13,17 +17,17 @@ interface shopDiscount4ReviewIProduct
 	public function getName();
 
 	/**
-	 * @return shopDiscount4ReviewIProductSku
+	 * @return ISku
 	 */
 	public function getSku();
 
 	/**
-	 * @return shopDiscount4ReviewIProductSku[]
+	 * @return ISku[]
 	 */
 	public function getAllSkus();
 
 	/**
-	 * @return shopDiscount4ReviewIReview[]
+	 * @return IReview[]
 	 */
 	public function getReviews();
 }

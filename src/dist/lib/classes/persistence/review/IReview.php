@@ -1,6 +1,11 @@
 <?php
 
-interface shopDiscount4ReviewIReview
+namespace Discount4Review\Review;
+
+use DateTime;
+use Discount4Review\Product\IProduct;
+
+interface IReview
 {
 	/**
 	 * @return int
@@ -8,7 +13,7 @@ interface shopDiscount4ReviewIReview
 	public function getId();
 
 	/**
-	 * @return shopDiscount4ReviewIProduct
+	 * @return IProduct
 	 */
 	public function getProduct();
 
@@ -25,7 +30,7 @@ interface shopDiscount4ReviewIReview
 	public function getRate();
 
 	/**
-	 * @return shopDiscount4ReviewIReviewAuthor
+	 * @return IAuthor
 	 */
 	public function getAuthor();
 
@@ -45,7 +50,7 @@ interface shopDiscount4ReviewIReview
 	public function getText();
 
 	/**
-	 * @return shopDiscount4ReviewIReviewImage[]
+	 * @return IImage[]
 	 */
 	public function getImages();
 }

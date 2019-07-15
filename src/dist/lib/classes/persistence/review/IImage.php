@@ -1,6 +1,8 @@
 <?php
 
-interface shopDiscount4ReviewIReviewImage
+namespace Discount4Review\Review;
+
+interface IImage
 {
 	/**
 	 * @return int

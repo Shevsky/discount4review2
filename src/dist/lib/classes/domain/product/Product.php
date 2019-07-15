@@ -1,6 +1,10 @@
 <?php
 
-class shopDiscount4ReviewProduct implements shopDiscount4ReviewIProduct
+namespace Discount4Review\Product;
+
+use shopProduct;
+
+class Product implements IProduct
 {
 	private $id;
 	private $product;
@@ -31,21 +35,19 @@ class shopDiscount4ReviewProduct implements shopDiscount4ReviewIProduct
 	}
 
 	/**
-	 * @return shopDiscount4ReviewIProductSku
+	 * @return ISku
 	 */
 	public function getSku()
 	{
-		// TODO: Implement getSku() method.
-		throw new Exception('[getSku] not implemented');
+		return null;
 	}
 
 	/**
-	 * @return shopDiscount4ReviewIProductSku[]
+	 * @return ISku[]
 	 */
 	public function getAllSkus()
 	{
-		// TODO: Implement getAllSkus() method.
-		throw new Exception('[getAllSkus] not implemented');
+		return [];
 	}
 
 	/**
@@ -53,7 +55,6 @@ class shopDiscount4ReviewProduct implements shopDiscount4ReviewIProduct
 	 */
 	public function getReviews()
 	{
-		// TODO: Implement getReviews() method.
-		throw new Exception('[getReviews] not implemented');
+		return [];
 	}
 }

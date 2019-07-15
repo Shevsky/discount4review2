@@ -1,6 +1,6 @@
 <?php
 
-class shopDiscount4ReviewReviewModel extends waModel
+class shopDiscount4reviewReviewModel extends waModel
 {
 	protected $table = 'shop_discount4review_review';
 }

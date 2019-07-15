@@ -1,6 +1,8 @@
 <?php
 
-class shopDiscount4ReviewReviewAuthor implements shopDiscount4ReviewIReviewAuthor
+namespace Discount4Review\Review;
+
+class Author implements IAuthor
 {
 	private $id;
 	private $name;

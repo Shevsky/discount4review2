@@ -1,6 +1,14 @@
 <?php
 
-class shopDiscount4ReviewReview implements shopDiscount4ReviewIReview
+namespace Discount4Review\Review;
+
+use DateTime;
+use Discount4Review\Context;
+use Discount4Review\Product\IProduct;
+use shopDiscount4reviewReviewModel;
+use shopProductReviewsModel;
+
+class Review implements IReview
 {
 	private $id;
 	private $product_reviews_model;
@@ -16,7 +24,7 @@ class shopDiscount4ReviewReview implements shopDiscount4ReviewIReview
 	{
 		$this->id = $id;
 		$this->product_reviews_model = new shopProductReviewsModel();
-		$this->review_model = new shopDiscount4ReviewReviewModel();
+		$this->review_model = new shopDiscount4reviewReviewModel();
 
 		$this->data = $this->product_reviews_model->getById($this->id);
 		$extend_data = $this->review_model->getById($this->id);
@@ -36,13 +44,13 @@ class shopDiscount4ReviewReview implements shopDiscount4ReviewIReview
 	}
 
 	/**
-	 * @return shopDiscount4ReviewIProduct
+	 * @return IProduct
 	 */
 	public function getProduct()
 	{
 		$product_id = (int)$this->data['product_id'];
 
-		return shopDiscount4ReviewContext::getInstance()->getRegistry()->getProduct($product_id);
+		return Context::getInstance()->getRegistry()->getProduct($product_id);
 	}
 
 	/**
@@ -69,13 +77,13 @@ class shopDiscount4ReviewReview implements shopDiscount4ReviewIReview
 	}
 
 	/**
-	 * @return shopDiscount4ReviewIReviewAuthor
+	 * @return IAuthor
 	 */
 	public function getAuthor()
 	{
 		if (!isset($this->author))
 		{
-			$this->author = new shopDiscount4ReviewReviewAuthor(
+			$this->author = new Author(
 				$this->data['contact_id'],
 				$this->data['name'],
 				$this->data['email'],
@@ -111,11 +119,10 @@ class shopDiscount4ReviewReview implements shopDiscount4ReviewIReview
 	}
 
 	/**
-	 * @return shopDiscount4ReviewIReviewImage[]
+	 * @return IImage[]
 	 */
 	public function getImages()
 	{
-		// TODO: Implement getImages() method.
-		throw new Exception('[getImages] not implemented');
+		return [];
 	}
 }

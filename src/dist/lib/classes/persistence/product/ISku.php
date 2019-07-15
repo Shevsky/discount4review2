@@ -1,6 +1,8 @@
 <?php
 
-interface shopDiscount4ReviewIProductSku
+namespace Discount4Review\Product;
+
+interface ISku
 {
 	/**
 	 * @return int

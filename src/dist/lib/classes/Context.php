@@ -1,6 +1,10 @@
 <?php
 
-class shopDiscount4ReviewContext
+namespace Discount4Review;
+
+use shopDiscount4reviewPlugin;
+
+class Context
 {
 	private $plugin;
 
@@ -31,26 +35,26 @@ class shopDiscount4ReviewContext
 	}
 
 	/**
-	 * @return shopDiscount4ReviewFactory
+	 * @return Factory
 	 */
 	public function getFactory()
 	{
 		if (!isset($this->factory))
 		{
-			$this->factory = new shopDiscount4ReviewFactory();
+			$this->factory = new Factory();
 		}
 
 		return $this->factory;
 	}
 
 	/**
-	 * @return shopDiscount4ReviewRegistry
+	 * @return Registry
 	 */
 	public function getRegistry()
 	{
 		if (!isset($this->registry))
 		{
-			$this->registry = new shopDiscount4ReviewRegistry($this->getFactory());
+			$this->registry = new Registry($this->getFactory());
 		}
 
 		return $this->registry;

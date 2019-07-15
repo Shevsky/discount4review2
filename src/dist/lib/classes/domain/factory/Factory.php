@@ -1,6 +1,8 @@
 <?php
 
-class shopDiscount4ReviewFactory implements shopDiscount4ReviewIFactory
+namespace Discount4Review;
+
+class Factory implements IFactory
 {
 	/**
 	 * @param string $identify_key
