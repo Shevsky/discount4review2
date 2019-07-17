@@ -18,7 +18,7 @@ class Autoloader
 		}
 
 		spl_autoload_register(
-			array(__CLASS__, 'autoload'),
+			[__CLASS__, 'autoload'],
 			true,
 			$prepend
 		);
