@@ -1,6 +1,6 @@
 <?php
 
-namespace Discount4Review\Product;
+namespace Discount4Review\Persistence\Product;
 
 interface ISku
 {

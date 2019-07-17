@@ -1,6 +1,6 @@
 <?php
 
-namespace Discount4Review;
+namespace Discount4Review\Persistence;
 
 class Registry
 {

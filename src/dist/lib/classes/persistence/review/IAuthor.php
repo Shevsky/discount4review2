@@ -1,6 +1,6 @@
 <?php
 
-namespace Discount4Review\Review;
+namespace Discount4Review\Persistence\Review;
 
 interface IAuthor
 {

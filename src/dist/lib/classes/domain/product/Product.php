@@ -1,7 +1,8 @@
 <?php
 
-namespace Discount4Review\Product;
+namespace Discount4Review\Domain\Product;
 
+use Discount4Review\Persistence\Product\IProduct;
 use shopProduct;
 
 class Product implements IProduct

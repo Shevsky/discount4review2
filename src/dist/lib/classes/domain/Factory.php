@@ -1,6 +1,8 @@
 <?php
 
-namespace Discount4Review;
+namespace Discount4Review\Domain;
+
+use Discount4Review\Persistence;
 
 class Factory implements IFactory
 {
