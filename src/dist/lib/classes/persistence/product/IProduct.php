@@ -30,4 +30,9 @@ interface IProduct
 	 * @return IReview[]
 	 */
 	public function getReviews();
+
+	/**
+	 * @return string
+	 */
+	public function getCurrency();
 }

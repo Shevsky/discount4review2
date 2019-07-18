@@ -6,20 +6,29 @@ use Discount4Review\Persistence\Product\ISku;
 
 class Sku implements ISku
 {
+	private $product;
 	private $id;
 	private $sku;
 
 	/**
+	 * @param Product $product
 	 * @param int $id
+	 */
+	public function __construct(Product $product, $id)
+	{
+		$this->product = $product;
+		$this->id = $id;
+	}
+
+	/**
 	 * @param mixed[] $sku = [
 	 *  'name' => string,
 	 *  'sku' => string,
 	 *  'count' => int
 	 * ]
 	 */
-	public function __construct($id, $sku)
+	public function setSku(array $sku = [])
 	{
-		$this->id = $id;
 		$this->sku = $sku;
 	}
 
@@ -55,5 +64,13 @@ class Sku implements ISku
 		}
 
 		return '';
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getCurrency()
+	{
+		return $this->product->getCurrency();
 	}
 }

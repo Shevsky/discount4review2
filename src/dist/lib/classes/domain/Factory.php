@@ -2,17 +2,32 @@
 
 namespace Discount4Review\Domain;
 
-use Discount4Review\Domain\Product\Product;
 use Discount4Review\Persistence\IFactory;
+use Discount4Review\Domain\Product\Product;
+use Discount4Review\Domain\Product\Sku;
+use Discount4Review\Persistence\Product\IProduct;
 
 class Factory implements IFactory
 {
 	/**
-	 * @param string $identify_key
+	 * @param int $id
 	 * @return Product
 	 */
-	public function createProduct($identify_key)
+	public function createProduct($id)
 	{
-		return new Product($identify_key);
+		return new Product($id);
+	}
+
+	/**
+	 * @param IProduct $product
+	 * @param int $id
+	 * @return Sku
+	 */
+	public function createSku(IProduct $product, $id)
+	{
+		/**
+		 * @var Product $product
+		 */
+		return new Sku($product, $id);
 	}
 }

@@ -2,6 +2,7 @@
 
 namespace Discount4Review\Domain\Product;
 
+use Discount4Review\Context;
 use Discount4Review\Persistence\Product\IProduct;
 use Discount4Review\Persistence\Product\ISku;
 use Discount4Review\Persistence\Review\IReview;
@@ -11,6 +12,7 @@ class Product implements IProduct
 {
 	private $id;
 	private $product;
+	private $skus;
 
 	/**
 	 * @param int $id
@@ -42,7 +44,15 @@ class Product implements IProduct
 	 */
 	public function getSku()
 	{
-		return null;
+		$_sku = $this->product->skus[$this->product->sku_id];
+
+		/**
+		 * @var Sku $sku
+		 */
+		$sku = Context::getInstance()->getRegistry()->getSku($this, $_sku['id']);
+		$sku->setSku($_sku);
+
+		return $sku;
 	}
 
 	/**
@@ -50,7 +60,20 @@ class Product implements IProduct
 	 */
 	public function getAllSkus()
 	{
-		return [];
+		return array_values(
+			array_map(
+				function($_sku) {
+					/**
+					 * @var Sku $sku
+					 */
+					$sku = Context::getInstance()->getRegistry()->getSku($this, $_sku['id']);
+					$sku->setSku($_sku);
+
+					return $sku;
+				},
+				$this->product->skus
+			)
+		);
 	}
 
 	/**
@@ -59,5 +82,13 @@ class Product implements IProduct
 	public function getReviews()
 	{
 		return [];
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getCurrency()
+	{
+		return $this->product->currency;
 	}
 }

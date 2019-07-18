@@ -7,6 +7,7 @@ class Registry
 	private $factory;
 
 	private $products = [];
+	private $skus = [];
 
 	/**
 	 * @param IFactory $factory
@@ -17,16 +18,33 @@ class Registry
 	}
 
 	/**
-	 * @param mixed $identify_key
+	 * @param int $id
 	 * @return Product\IProduct
 	 */
-	public function getProduct($identify_key)
+	public function getProduct($id)
 	{
-		if (!isset($this->products[$identify_key]))
+		if (!isset($this->products[$id]))
 		{
-			$this->products[$identify_key] = $this->factory->createProduct($identify_key);
+			$this->products[$id] = $this->factory->createProduct($id);
 		}
 
-		return $this->products[$identify_key];
+		return $this->products[$id];
+	}
+
+	/**
+	 * @param Product\IProduct $product
+	 * @param int $id
+	 * @return Product\ISku
+	 */
+	public function getSku(Product\IProduct $product, $id)
+	{
+		$identify_key = "{$product->getId()}/{$id}";
+
+		if (!isset($this->skus[$identify_key]))
+		{
+			$this->skus[$identify_key] = $this->factory->createSku($product, $id);
+		}
+
+		return $this->skus[$identify_key];
 	}
 }

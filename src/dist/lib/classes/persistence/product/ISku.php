@@ -18,4 +18,9 @@ interface ISku
 	 * @return string
 	 */
 	public function getName();
+
+	/**
+	 * @return string
+	 */
+	public function getCurrency();
 }

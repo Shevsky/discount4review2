@@ -5,8 +5,15 @@ namespace Discount4Review\Persistence;
 interface IFactory
 {
 	/**
-	 * @param mixed $identify_key
+	 * @param int $id
 	 * @return Product\IProduct
 	 */
-	public function createProduct($identify_key);
+	public function createProduct($id);
+
+	/**
+	 * @param Product\IProduct $product
+	 * @param int $id
+	 * @return Product\ISku
+	 */
+	public function createSku(Product\IProduct $product, $id);
 }
