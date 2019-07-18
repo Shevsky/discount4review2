@@ -2,6 +2,8 @@
 
 namespace Discount4Review;
 
+use Discount4Review\Domain\Factory;
+use Discount4Review\Persistence\Registry;
 use shopDiscount4reviewPlugin;
 
 class Context
