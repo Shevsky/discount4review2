@@ -3,6 +3,8 @@
 namespace Discount4Review\Domain\Product;
 
 use Discount4Review\Persistence\Product\IProduct;
+use Discount4Review\Persistence\Product\ISku;
+use Discount4Review\Persistence\Review\IReview;
 use shopProduct;
 
 class Product implements IProduct
@@ -52,7 +54,7 @@ class Product implements IProduct
 	}
 
 	/**
-	 * @return shopDiscount4ReviewIReview[]
+	 * @return IReview[]
 	 */
 	public function getReviews()
 	{
