@@ -1,6 +1,6 @@
 <?php
 
-namespace Shevsky\Discount4Review\Domain;
+namespace Shevsky\Discount4Review\Domain\Wa;
 
 use Shevsky\Discount4Review\Persistence\IFactory;
 use Shevsky\Discount4Review\Domain\Product\Product;

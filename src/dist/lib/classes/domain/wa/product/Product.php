@@ -1,6 +1,6 @@
 <?php
 
-namespace Shevsky\Discount4Review\Domain\Product;
+namespace Shevsky\Discount4Review\Domain\Wa\Product;
 
 use Shevsky\Discount4Review\Context\Context;
 use Shevsky\Discount4Review\Persistence\Product\IProduct;

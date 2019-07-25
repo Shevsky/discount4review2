@@ -1,6 +1,6 @@
 <?php
 
-namespace Shevsky\Discount4Review\Domain\Review;
+namespace Shevsky\Discount4Review\Domain\Wa\Review;
 
 use DateTime;
 use Shevsky\Discount4Review\Context\Context;
