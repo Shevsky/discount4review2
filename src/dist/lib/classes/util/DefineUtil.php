@@ -30,7 +30,7 @@ class DefineUtil
 	{
 		if (!isset(self::$self))
 		{
-			if (!isset($plugin))
+			if (!isset($env))
 			{
 				$env = Env::getInstance();
 			}

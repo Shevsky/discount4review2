@@ -30,7 +30,7 @@ class Env implements IEnv
 	/**
 	 * @param shopDiscount4reviewPlugin $plugin
 	 */
-	public function __construct(shopDiscount4reviewPlugin $plugin)
+	private function __construct(shopDiscount4reviewPlugin $plugin)
 	{
 		$this->plugin = $plugin;
 		$this->wa_env = new WaEnv();
