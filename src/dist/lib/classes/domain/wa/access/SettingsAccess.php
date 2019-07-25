@@ -54,7 +54,7 @@ abstract class SettingsAccess extends waModel implements ISettingsAccess
 		$settings = $this->getSettings();
 		if (!isset($settings[$name]))
 		{
-			return null;
+			return [];
 		}
 
 		return $settings[$name];

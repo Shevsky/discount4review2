@@ -2,8 +2,8 @@
 
 namespace Shevsky\Discount4Review\Context;
 
-use Shevsky\Discount4Review\Domain\Common\Settings\Storage\BasicSettingsStorage;
-use Shevsky\Discount4Review\Domain\Common\Settings\Storage\StorefrontSettingsStorage;
+use Shevsky\Discount4Review\Domain\Common\SettingsStorage\BasicSettingsStorage;
+use Shevsky\Discount4Review\Domain\Common\SettingsStorage\StorefrontSettingsStorage;
 use Shevsky\Discount4Review\Domain\Wa\Env\Env;
 use Shevsky\Discount4Review\Domain\Wa\Factory;
 use Shevsky\Discount4Review\Domain\Wa\Util\EventUtil;

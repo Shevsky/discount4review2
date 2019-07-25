@@ -15,7 +15,7 @@ abstract class CommonSettingsStorage implements ISettingsStorage
 {
 	protected $access;
 
-	private $setting_items;
+	private $setting_items = [];
 	private $settings_config;
 
 	/**
@@ -76,11 +76,6 @@ abstract class CommonSettingsStorage implements ISettingsStorage
 		if (!$this->settings_config->hasSetting($name))
 		{
 			throw new Exception("Не найдена настройка \"{$name}\"");
-		}
-
-		if (!isset($this->setting_items))
-		{
-			$this->setting_items = [];
 		}
 
 		if (!array_key_exists($name, $this->setting_items))
