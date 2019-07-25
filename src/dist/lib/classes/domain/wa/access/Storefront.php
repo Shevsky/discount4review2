@@ -124,9 +124,17 @@ class Storefront implements IStorefront
 			'route' => $this->getRoute(),
 		];
 
-		if (!in_array('Theme', $excluded_rows))
+		if (!in_array('theme', $excluded_rows))
 		{
-			$rows['Theme'] = $this->getTheme()->toArray(['storefronts']);
+			$theme = $this->getTheme();
+			if (!$theme)
+			{
+				$rows['theme'] = $theme;
+			}
+			else
+			{
+				$rows['theme'] = $theme->toArray(['storefronts']);
+			}
 		}
 
 		return $rows;
