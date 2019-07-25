@@ -2,17 +2,25 @@
 
 namespace Shevsky\Discount4Review\Context;
 
+use Shevsky\Discount4Review\Domain\Common\Settings\Storage\BasicSettingsStorage;
+use Shevsky\Discount4Review\Domain\Common\Settings\Storage\StorefrontSettingsStorage;
 use Shevsky\Discount4Review\Domain\Wa\Env\Env;
 use Shevsky\Discount4Review\Domain\Wa\Factory;
 use Shevsky\Discount4Review\Persistence\Registry;
+use shopDiscount4reviewBasicSettingsModel;
 use shopDiscount4reviewPlugin;
+use shopDiscount4reviewStorefrontSettingsModel;
 
 class Context
 {
+	use PluginAccess;
+
 	private $plugin;
 	private $factory;
 	private $registry;
 	private $env;
+	private $basic_settings_storage;
+	private $storefront_settings_storage;
 
 	private static $self;
 
@@ -79,5 +87,33 @@ class Context
 		}
 
 		return $this->env;
+	}
+
+	/**
+	 * @return BasicSettingsStorage
+	 */
+	public function getBasicSettingsStorage()
+	{
+		if (!isset($this->basic_settings_storage))
+		{
+			$this->basic_settings_storage = new BasicSettingsStorage(new shopDiscount4reviewBasicSettingsModel());
+		}
+
+		return $this->basic_settings_storage;
+	}
+
+	/**
+	 * @return StorefrontSettingsStorage
+	 */
+	public function getStorefrontSettingsStorage()
+	{
+		if (!isset($this->storefront_settings_storage))
+		{
+			$this->storefront_settings_storage = new StorefrontSettingsStorage(
+				new shopDiscount4reviewStorefrontSettingsModel()
+			);
+		}
+
+		return $this->storefront_settings_storage;
 	}
 }
