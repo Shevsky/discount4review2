@@ -1,0 +1,45 @@
+{
+	"compilerOptions": {
+		"module": "commonjs",
+		"removeComments": true,
+		"preserveConstEnums": true,
+		"sourceMap": true,
+		"allowSyntheticDefaultImports": true,
+		"esModuleInterop": true,
+		"target": "es5",
+		"baseUrl": ".",
+		"paths": {
+			"backend/*": [
+				"src/ts/backend/*"
+			],
+			"frontend/*": [
+				"src/ts/frontend/*"
+			],
+			"settings/*": [
+				"src/ts/settings/*"
+			],
+			"lib/*": [
+				"src/ts/lib/*"
+			],
+			"env/*": [
+				"src/ts/env/*"
+			],
+			"util/*": [
+				"src/ts/util/*"
+			],
+			"vendor/*": [
+				"src/ts/vendor/*"
+			]
+		},
+		"lib": [
+			"es5",
+			"es6",
+			"es2017",
+			"es2018",
+			"es2018.promise",
+			"dom"
+		],
+		"jsx": "react",
+		"experimentalDecorators": true
+	}
+}
