@@ -89,7 +89,7 @@ class Context
 	{
 		if (!isset($this->env))
 		{
-			$this->env = Env::getInstance();
+			$this->env = Env::getInstance($this->plugin);
 		}
 
 		return $this->env;
