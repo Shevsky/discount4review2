@@ -2,16 +2,17 @@
 
 namespace Shevsky\Discount4Review\Context;
 
-use Shevsky\Discount4Review\Domain\Factory;
+use Shevsky\Discount4Review\Domain\Wa\Env\Env;
+use Shevsky\Discount4Review\Domain\Wa\Factory;
 use Shevsky\Discount4Review\Persistence\Registry;
 use shopDiscount4reviewPlugin;
 
 class Context
 {
 	private $plugin;
-
 	private $factory;
 	private $registry;
+	private $env;
 
 	private static $self;
 
@@ -65,5 +66,18 @@ class Context
 		}
 
 		return $this->registry;
+	}
+
+	/**
+	 * @return Env
+	 */
+	public function getEnv()
+	{
+		if (!isset($this->env))
+		{
+			$this->env = Env::getInstance();
+		}
+
+		return $this->env;
 	}
 }
