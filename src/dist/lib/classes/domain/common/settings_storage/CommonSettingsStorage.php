@@ -1,6 +1,6 @@
 <?php
 
-namespace Shevsky\Discount4Review\Domain\Common\Settings\Storage;
+namespace Shevsky\Discount4Review\Domain\Common\SettingsStorage;
 
 use Shevsky\Discount4Review\Context\Context;
 use Shevsky\Discount4Review\Domain\Common\SettingsConfig\SettingsConfig;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Shevsky\Discount4Review\Domain\Common\Settings\Storage;
+namespace Shevsky\Discount4Review\Domain\Common\SettingsStorage;
 
 class BasicSettingsStorage extends CommonSettingsStorage
 {
