@@ -1,0 +1,11 @@
+{strip}
+	<div id="shop-discount4review-settings"></div>
+
+	<link rel="stylesheet" href="{$css_url}">
+	<script src="{$js_url}"></script>
+	<script>
+		(function() {
+			new window.shop_discount4review_settings('#shop-discount4review-settings', {$params|json_encode}, {$settings|json_encode});
+		})();
+	</script>
+{/strip}
