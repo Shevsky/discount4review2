@@ -138,7 +138,7 @@ class Env implements IEnv
 	}
 
 	/**
-	 * @return ITheme
+	 * @return ITheme[]
 	 */
 	public function getThemes()
 	{
