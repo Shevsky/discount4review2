@@ -1,9 +1,9 @@
 <?php
 
-namespace Discount4Review\Persistence\Review;
+namespace Shevsky\Discount4Review\Persistence\Review;
 
 use DateTime;
-use Discount4Review\Persistence\Product\IProduct;
+use Shevsky\Discount4Review\Persistence\Product\IProduct;
 
 interface IReview
 {

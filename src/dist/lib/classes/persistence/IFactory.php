@@ -1,6 +1,6 @@
 <?php
 
-namespace Discount4Review\Persistence;
+namespace Shevsky\Discount4Review\Persistence;
 
 interface IFactory
 {

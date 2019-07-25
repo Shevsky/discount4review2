@@ -1,13 +1,13 @@
 <?php
 
-namespace Discount4Review\Domain\Review;
+namespace Shevsky\Discount4Review\Domain\Review;
 
 use DateTime;
-use Discount4Review;
-use Discount4Review\Persistence\Product\IProduct;
-use Discount4Review\Persistence\Review\IAuthor;
-use Discount4Review\Persistence\Review\IImage;
-use Discount4Review\Persistence\Review\IReview;
+use Shevsky\Discount4Review\Context\Context;
+use Shevsky\Discount4Review\Persistence\Product\IProduct;
+use Shevsky\Discount4Review\Persistence\Review\IAuthor;
+use Shevsky\Discount4Review\Persistence\Review\IImage;
+use Shevsky\Discount4Review\Persistence\Review\IReview;
 use shopDiscount4reviewReviewModel;
 use shopProductReviewsModel;
 

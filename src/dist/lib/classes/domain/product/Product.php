@@ -1,11 +1,11 @@
 <?php
 
-namespace Discount4Review\Domain\Product;
+namespace Shevsky\Discount4Review\Domain\Product;
 
-use Discount4Review\Context;
-use Discount4Review\Persistence\Product\IProduct;
-use Discount4Review\Persistence\Product\ISku;
-use Discount4Review\Persistence\Review\IReview;
+use Shevsky\Discount4Review\Context\Context;
+use Shevsky\Discount4Review\Persistence\Product\IProduct;
+use Shevsky\Discount4Review\Persistence\Product\ISku;
+use Shevsky\Discount4Review\Persistence\Review\IReview;
 use shopProduct;
 
 class Product implements IProduct

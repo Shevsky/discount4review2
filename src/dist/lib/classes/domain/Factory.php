@@ -1,11 +1,11 @@
 <?php
 
-namespace Discount4Review\Domain;
+namespace Shevsky\Discount4Review\Domain;
 
-use Discount4Review\Persistence\IFactory;
-use Discount4Review\Domain\Product\Product;
-use Discount4Review\Domain\Product\Sku;
-use Discount4Review\Persistence\Product\IProduct;
+use Shevsky\Discount4Review\Persistence\IFactory;
+use Shevsky\Discount4Review\Domain\Product\Product;
+use Shevsky\Discount4Review\Domain\Product\Sku;
+use Shevsky\Discount4Review\Persistence\Product\IProduct;
 
 class Factory implements IFactory
 {

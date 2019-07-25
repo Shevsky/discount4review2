@@ -1,10 +1,10 @@
 <?php
 
-namespace Discount4Review;
+namespace Shevsky\Discount4Review;
 
 class Autoloader
 {
-	private static $namespace = ['Discount4Review'];
+	private static $namespace = ['Shevsky', 'Discount4Review'];
 	private static $registered;
 
 	/**

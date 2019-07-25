@@ -1,8 +1,8 @@
 <?php
 
-namespace Discount4Review\Domain\Review;
+namespace Shevsky\Discount4Review\Domain\Review;
 
-use Discount4Review\Persistence\Review\IAuthor;
+use Shevsky\Discount4Review\Persistence\Review\IAuthor;
 
 class Author implements IAuthor
 {

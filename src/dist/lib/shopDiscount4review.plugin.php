@@ -1,7 +1,7 @@
 <?php
 
-use Discount4Review\Autoloader;
-use Discount4Review\Context\Context;
+use Shevsky\Discount4Review\Autoloader;
+use Shevsky\Discount4Review\Context\Context;
 
 class shopDiscount4reviewPlugin extends shopPlugin
 {

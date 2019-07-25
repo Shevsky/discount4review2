@@ -1,8 +1,8 @@
 <?php
 
-namespace Discount4Review\Persistence\Product;
+namespace Shevsky\Discount4Review\Persistence\Product;
 
-use Discount4Review\Persistence\Review\IReview;
+use Shevsky\Discount4Review\Persistence\Review\IReview;
 
 interface IProduct
 {

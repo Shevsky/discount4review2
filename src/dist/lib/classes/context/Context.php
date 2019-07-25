@@ -1,9 +1,9 @@
 <?php
 
-namespace Discount4Review\Context;
+namespace Shevsky\Discount4Review\Context;
 
-use Discount4Review\Domain\Factory;
-use Discount4Review\Persistence\Registry;
+use Shevsky\Discount4Review\Domain\Factory;
+use Shevsky\Discount4Review\Persistence\Registry;
 use shopDiscount4reviewPlugin;
 
 class Context

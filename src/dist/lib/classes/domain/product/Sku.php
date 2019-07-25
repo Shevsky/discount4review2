@@ -1,8 +1,8 @@
 <?php
 
-namespace Discount4Review\Domain\Product;
+namespace Shevsky\Discount4Review\Domain\Product;
 
-use Discount4Review\Persistence\Product\ISku;
+use Shevsky\Discount4Review\Persistence\Product\ISku;
 
 class Sku implements ISku
 {
