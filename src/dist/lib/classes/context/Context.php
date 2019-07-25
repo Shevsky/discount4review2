@@ -1,6 +1,6 @@
 <?php
 
-namespace Discount4Review;
+namespace Discount4Review\Context;
 
 use Discount4Review\Domain\Factory;
 use Discount4Review\Persistence\Registry;
@@ -18,19 +18,24 @@ class Context
 	/**
 	 * @param shopDiscount4reviewPlugin $plugin
 	 */
-	public function __construct(shopDiscount4reviewPlugin $plugin)
+	private function __construct(shopDiscount4reviewPlugin $plugin)
 	{
 		$this->plugin = $plugin;
 	}
 
 	/**
+	 * @param shopDiscount4reviewPlugin $plugin
 	 * @return self
 	 */
-	public static function getInstance()
+	public static function getInstance(shopDiscount4reviewPlugin $plugin = null)
 	{
 		if (!isset(self::$self))
 		{
-			self::$self = new self(shopDiscount4reviewPlugin::getInstance());
+			if (!isset($plugin))
+			{
+				$plugin = shopDiscount4reviewPlugin::getInstance();
+			}
+			self::$self = new self($plugin);
 		}
 
 		return self::$self;

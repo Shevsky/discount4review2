@@ -1,9 +1,14 @@
 <?php
 
+use Discount4Review\Autoloader;
+use Discount4Review\Context\Context;
+
 class shopDiscount4reviewPlugin extends shopPlugin
 {
 	const APP_ID = 'shop';
 	const PLUGIN_ID = 'discount4review';
+
+	private static $self;
 
 	/**
 	 * @inheritDoc
@@ -12,7 +17,8 @@ class shopDiscount4reviewPlugin extends shopPlugin
 	{
 		parent::__construct($info);
 
-		$this->registerAutoloader();
+		self::registerAutoloader();
+		self::$self = $this;
 	}
 
 	/**
@@ -20,11 +26,28 @@ class shopDiscount4reviewPlugin extends shopPlugin
 	 */
 	public static function getInstance()
 	{
-		return wa(self::APP_ID)->getPlugin(self::PLUGIN_ID);
+		if (!isset(self::$self))
+		{
+			self::$self = wa(self::APP_ID)->getPlugin(self::PLUGIN_ID);
+		}
+
+		return self::$self;
 	}
 
-	private function registerAutoloader()
+	/**
+	 * @return Context
+	 */
+	public static function getContext()
 	{
-		require_once __DIR__ . '/autoload.php';
+		self::registerAutoloader();
+
+		return Context::getInstance(self::getInstance());
+	}
+
+	private static function registerAutoloader()
+	{
+		require_once __DIR__ . '/classes/Autoloader.php';
+
+		Autoloader::register();
 	}
 }
