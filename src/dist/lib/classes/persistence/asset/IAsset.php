@@ -1,6 +1,6 @@
 <?php
 
-namespace BodySite\SearchPro\Persistence\Asset;
+namespace Shevsky\Discount4Review\Persistence\Asset;
 
 interface IAsset
 {

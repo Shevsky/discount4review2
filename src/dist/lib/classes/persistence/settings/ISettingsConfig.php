@@ -1,6 +1,6 @@
 <?php
 
-namespace BodySite\SearchPro\Persistence\Settings;
+namespace Shevsky\Discount4Review\Persistence\Settings;
 
 interface ISettingsConfig
 {
