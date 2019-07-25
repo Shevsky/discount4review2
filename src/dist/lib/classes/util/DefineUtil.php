@@ -2,6 +2,7 @@
 
 namespace Shevsky\Discount4Review\Util;
 
+use Shevsky\Discount4Review\Domain\Wa\Env\Env;
 use Shevsky\Discount4Review\Persistence\Access\IStorefront;
 use Shevsky\Discount4Review\Persistence\Access\ITheme;
 use Shevsky\Discount4Review\Persistence\Env\IEnv;
@@ -10,12 +11,33 @@ class DefineUtil
 {
 	private $env;
 
+	private static $self;
+
 	/**
 	 * @param IEnv $env
 	 */
-	public function __construct(IEnv $env)
+	private function __construct(IEnv $env)
 	{
 		$this->env = $env;
+		self::$self = $this;
+	}
+
+	/**
+	 * @param IEnv $env
+	 * @return self
+	 */
+	public static function getInstance(IEnv $env = null)
+	{
+		if (!isset(self::$self))
+		{
+			if (!isset($plugin))
+			{
+				$env = Env::getInstance();
+			}
+			self::$self = new self($env);
+		}
+
+		return self::$self;
 	}
 
 	/**
