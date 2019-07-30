@@ -3,31 +3,50 @@
 namespace Shevsky\Discount4Review\Domain\Wa;
 
 use Shevsky\Discount4Review\Persistence\IFactory;
-use Shevsky\Discount4Review\Domain\Product\Product;
-use Shevsky\Discount4Review\Domain\Product\Sku;
+use Shevsky\Discount4Review\Domain\Wa\Product\Product;
+use Shevsky\Discount4Review\Domain\Wa\Product\Sku;
 use Shevsky\Discount4Review\Persistence\Product\IProduct;
 
 class Factory implements IFactory
 {
+	private static $self;
+
+	private function __construct()
+	{
+	}
+
 	/**
-	 * @param int $id
+	 * @return self
+	 */
+	public static function getInstance()
+	{
+		if (!isset(self::$self))
+		{
+			self::$self = new self();
+		}
+
+		return self::$self;
+	}
+
+	/**
+	 * @param mixed $data
 	 * @return Product
 	 */
-	public function createProduct($id)
+	public function createProduct($data)
 	{
-		return new Product($id);
+		return new Product($data);
 	}
 
 	/**
 	 * @param IProduct $product
-	 * @param int $id
+	 * @param mixed $data
 	 * @return Sku
 	 */
-	public function createSku(IProduct $product, $id)
+	public function createSku(IProduct $product, $data)
 	{
 		/**
 		 * @var Product $product
 		 */
-		return new Sku($product, $id);
+		return new Sku($product, $data);
 	}
 }

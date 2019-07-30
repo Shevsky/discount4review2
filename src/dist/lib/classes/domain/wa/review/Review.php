@@ -4,6 +4,7 @@ namespace Shevsky\Discount4Review\Domain\Wa\Review;
 
 use DateTime;
 use Shevsky\Discount4Review\Context\Context;
+use Shevsky\Discount4Review\Domain\Wa\Factory;
 use Shevsky\Discount4Review\Persistence\Product\IProduct;
 use Shevsky\Discount4Review\Persistence\Review\IAuthor;
 use Shevsky\Discount4Review\Persistence\Review\IImage;
@@ -53,7 +54,7 @@ class Review implements IReview
 	{
 		$product_id = (int)$this->data['product_id'];
 
-		return Context::getInstance()->getRegistry()->getProduct($product_id);
+		return Factory::getInstance()->createProduct($product_id);
 	}
 
 	/**

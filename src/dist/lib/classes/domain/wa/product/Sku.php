@@ -12,24 +12,13 @@ class Sku implements ISku
 
 	/**
 	 * @param Product $product
-	 * @param int $id
+	 * @param mixed $data
 	 */
-	public function __construct(Product $product, $id)
+	public function __construct(Product $product, $data)
 	{
 		$this->product = $product;
-		$this->id = $id;
-	}
-
-	/**
-	 * @param mixed[] $sku = [
-	 *  'name' => string,
-	 *  'sku' => string,
-	 *  'count' => int
-	 * ]
-	 */
-	public function setSku(array $sku = [])
-	{
-		$this->sku = $sku;
+		$this->id = (int)$data['id'];
+		$this->sku = $data;
 	}
 
 	/**

@@ -2,7 +2,9 @@
 
 namespace Shevsky\Discount4Review\Domain\Wa\Product;
 
+use Exception;
 use Shevsky\Discount4Review\Context\Context;
+use Shevsky\Discount4Review\Domain\Wa\Factory;
 use Shevsky\Discount4Review\Persistence\Product\IProduct;
 use Shevsky\Discount4Review\Persistence\Product\ISku;
 use Shevsky\Discount4Review\Persistence\Review\IReview;
@@ -15,12 +17,33 @@ class Product implements IProduct
 	private $skus;
 
 	/**
-	 * @param int $id
+	 * @param mixed $data
+	 * @throws Exception
 	 */
-	public function __construct($id)
+	public function __construct($data)
 	{
-		$this->id = $id;
-		$this->product = new shopProduct($this->id);
+		if (!is_numeric($data))
+		{
+			if ($data instanceof shopProduct)
+			{
+				$this->id = $data->getId();
+				$this->product = $data;
+			}
+			elseif (is_array($data) && array_key_exists('id', $data))
+			{
+				$this->id = $data['id'];
+				$this->product = new shopProduct($data);
+			}
+			else
+			{
+				throw new Exception('Неизвестные аргументы для построения экземпляра товара');
+			}
+		}
+		else
+		{
+			$this->id = $data;
+			$this->product = new shopProduct($this->id);
+		}
 	}
 
 	/**
@@ -46,11 +69,7 @@ class Product implements IProduct
 	{
 		$_sku = $this->product->skus[$this->product->sku_id];
 
-		/**
-		 * @var Sku $sku
-		 */
-		$sku = Context::getInstance()->getRegistry()->getSku($this, $_sku['id']);
-		$sku->setSku($_sku);
+		$sku = Factory::getInstance()->createSku($this, $_sku);
 
 		return $sku;
 	}
@@ -66,8 +85,7 @@ class Product implements IProduct
 					/**
 					 * @var Sku $sku
 					 */
-					$sku = Context::getInstance()->getRegistry()->getSku($this, $_sku['id']);
-					$sku->setSku($_sku);
+					$sku = Factory::getInstance()->createSku($this, $_sku);
 
 					return $sku;
 				},
