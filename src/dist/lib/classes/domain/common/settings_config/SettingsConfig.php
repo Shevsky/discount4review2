@@ -48,12 +48,11 @@ class SettingsConfig implements ISettingsConfig
 	{
 		$this->config_items = [];
 
-		foreach ($this->settings_specification as $name => $setting_specification)
+		foreach ($this->settings_specification as $name => $value)
 		{
-			$type = $setting_specification['type'];
-			$default_value = $setting_specification['default_value'];
+			$type = gettype($value);
 
-			$this->config_items[$name] = new SettingsConfigItem($name, $default_value, $type);
+			$this->config_items[$name] = new SettingsConfigItem($name, $value, $type);
 		}
 	}
 
