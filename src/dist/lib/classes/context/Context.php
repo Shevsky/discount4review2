@@ -67,7 +67,7 @@ class Context
 	{
 		if (!isset($this->factory))
 		{
-			$this->factory = new Factory();
+			$this->factory = Factory::getInstance();
 		}
 
 		return $this->factory;
