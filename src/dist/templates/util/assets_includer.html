@@ -1,0 +1,9 @@
+{strip}
+	{foreach $assets.css as $css_asset_url}
+		<link rel="stylesheet" href="{$css_asset_url|escape}">
+	{/foreach}
+
+	{foreach $assets.js as $js_asset_url}
+		<script src="{$js_asset_url|escape}"></script>
+	{/foreach}
+{/strip}
