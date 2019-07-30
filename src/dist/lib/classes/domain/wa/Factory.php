@@ -2,6 +2,7 @@
 
 namespace Shevsky\Discount4Review\Domain\Wa;
 
+use Exception;
 use Shevsky\Discount4Review\Persistence\IFactory;
 use Shevsky\Discount4Review\Domain\Wa\Product\Product;
 use Shevsky\Discount4Review\Domain\Wa\Product\Sku;
@@ -31,6 +32,7 @@ class Factory implements IFactory
 	/**
 	 * @param mixed $data
 	 * @return Product
+	 * @throws Exception
 	 */
 	public function createProduct($data)
 	{
