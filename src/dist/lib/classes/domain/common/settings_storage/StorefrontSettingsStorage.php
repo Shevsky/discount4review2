@@ -11,4 +11,12 @@ class StorefrontSettingsStorage extends CommonSettingsStorage
 	{
 		return 'storefront';
 	}
+
+	/**
+	 * @return bool
+	 */
+	public function getMyOrderAutoInjectStatus()
+	{
+		return $this->readSettingForStorefront('my_order.auto_inject_status');
+	}
 }

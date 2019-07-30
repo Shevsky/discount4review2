@@ -17,6 +17,6 @@ class BasicSettingsStorage extends CommonSettingsStorage
 	 */
 	public function getStatus()
 	{
-		return $this->getSetting('status')->getGeneral();
+		return $this->readSetting('status');
 	}
 }
