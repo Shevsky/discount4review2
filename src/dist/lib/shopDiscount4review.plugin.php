@@ -35,6 +35,16 @@ class shopDiscount4reviewPlugin extends shopPlugin
 	}
 
 	/**
+	 * @return bool
+	 */
+	public static function isEnabled()
+	{
+		$context = self::getContext();
+
+		return $context::getPluginStatus();
+	}
+
+	/**
 	 * @return Context
 	 */
 	public static function getContext()
@@ -42,6 +52,27 @@ class shopDiscount4reviewPlugin extends shopPlugin
 		self::registerAutoloader();
 
 		return Context::getInstance(self::getInstance());
+	}
+
+	/**
+	 * @param mixed $order
+	 * @return string
+	 */
+	public function frontendMyOrderHandler($order)
+	{
+		if (!self::isEnabled())
+		{
+			return '';
+		}
+
+		try
+		{
+			return self::getContext()->getFrontendService()->renderMyOrder([]);
+		}
+		catch (Exception $e)
+		{
+			return '';
+		}
 	}
 
 	private static function registerAutoloader()

@@ -2,6 +2,7 @@
 
 namespace Shevsky\Discount4Review\Domain\Wa\TemplatePersistence;
 
+use Shevsky\Discount4Review\Context\Context;
 use Shevsky\Discount4Review\Domain\Wa\AssetPersistence\CSSAsset;
 use Shevsky\Discount4Review\Domain\Wa\AssetPersistence\JSAsset;
 use Shevsky\Discount4Review\Persistence\Template\ITemplate;
@@ -112,6 +113,10 @@ abstract class Template implements ITemplate
 		$this->assign(
 			[
 				'assets' => $assets,
+				'plugin_url' => Context::getPluginUrl(),
+				'plugin_path' => Context::getPluginPath(),
+				'plugin_version' => Context::getPluginVersion(),
+				'util_path' => Context::getPluginPath() . 'templates/util/'
 			]
 		);
 	}

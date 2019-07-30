@@ -3,19 +3,19 @@
 namespace Shevsky\Discount4Review\Domain\Wa\TemplatePersistence;
 
 use Shevsky\Discount4Review\Context\Context;
-use Shevsky\Discount4Review\Persistence\Access\ITheme;
+use Shevsky\Discount4Review\Domain\Wa\Env\Env;
 use waFiles;
 
 abstract class ThemedTemplate extends Template
 {
-	private $theme;
+	private $env;
 
 	/**
-	 * @param ITheme $theme
+	 * @param Env $env
 	 */
-	public function __construct(ITheme $theme)
+	public function __construct(Env $env)
 	{
-		$this->theme = $theme;
+		$this->env = $env;
 	}
 
 	/**
@@ -60,7 +60,7 @@ abstract class ThemedTemplate extends Template
 	 */
 	private function getThemePath()
 	{
-		return $this->theme->getPath() . '/' . $this->getThemeTemplate();
+		return $this->env->getCurrentTheme()->getPath() . '/' . $this->getThemeTemplate();
 	}
 
 	/**
@@ -93,7 +93,7 @@ abstract class ThemedTemplate extends Template
 	{
 		$path = $this->getThemePath();
 
-		$this->theme->setFile($path, $value);
+		$this->env->getCurrentTheme()->setFile($path, $value);
 		waFiles::write($path, $value);
 	}
 }

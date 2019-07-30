@@ -7,6 +7,6 @@ return array(
 	'frontend' => true,
 	'custom_settings' => true,
 	'handlers' => array(
-
+		'frontend_my_order' => 'frontendMyOrderHandler'
 	)
 );
