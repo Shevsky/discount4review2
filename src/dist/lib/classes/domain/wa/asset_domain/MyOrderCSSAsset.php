@@ -11,6 +11,6 @@ class MyOrderCSSAsset extends CSSAsset
 	 */
 	public function getUrl()
 	{
-		return 'css/frontend/field.css';
+		return 'css/frontend/my_order.css';
 	}
 }

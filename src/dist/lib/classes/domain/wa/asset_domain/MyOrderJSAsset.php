@@ -11,6 +11,6 @@ class MyOrderJSAsset extends JSAsset
 	 */
 	public function getUrl()
 	{
-		return 'js/frontend/field.js';
+		return 'js/frontend/my_order.js';
 	}
 }
