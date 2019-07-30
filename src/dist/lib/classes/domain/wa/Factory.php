@@ -3,10 +3,12 @@
 namespace Shevsky\Discount4Review\Domain\Wa;
 
 use Exception;
+use Shevsky\Discount4Review\Domain\Wa\Review\Review;
 use Shevsky\Discount4Review\Persistence\IFactory;
 use Shevsky\Discount4Review\Domain\Wa\Product\Product;
 use Shevsky\Discount4Review\Domain\Wa\Product\Sku;
 use Shevsky\Discount4Review\Persistence\Product\IProduct;
+use Shevsky\Discount4Review\Persistence\Review\IReview;
 
 class Factory implements IFactory
 {
@@ -50,5 +52,15 @@ class Factory implements IFactory
 		 * @var Product $product
 		 */
 		return new Sku($product, $data);
+	}
+
+	/**
+	 * @param mixed $data
+	 * @return IReview
+	 * @throws Exception
+	 */
+	public function createReview($data)
+	{
+		return new Review($data);
 	}
 }
