@@ -60,14 +60,16 @@ class shopDiscount4reviewPlugin extends shopPlugin
 	 */
 	public function frontendMyOrderHandler($order)
 	{
-		if (!self::isEnabled())
+		if (!self::isEnabled() || !self::getContext()->getSettingsService()->storefront->getMyOrderAutoInjectStatus())
 		{
 			return '';
 		}
 
 		try
 		{
-			return self::getContext()->getFrontendService()->renderMyOrder([]);
+			return self::getContext()->getFrontendService()->renderMyOrder([
+				'order' => $order
+			]);
 		}
 		catch (Exception $e)
 		{
