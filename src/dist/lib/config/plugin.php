@@ -7,6 +7,8 @@ return array(
 	'frontend' => true,
 	'custom_settings' => true,
 	'handlers' => array(
-		'frontend_my_order' => 'frontendMyOrderHandler'
+		'frontend_my_order' => 'frontendMyOrderHandler',
+		'frontend_product' => 'frontendProductHandler',
+		'frontend_review_add.before' => 'frontendReviewAddBeforeHandler'
 	)
 );
