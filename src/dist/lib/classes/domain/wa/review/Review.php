@@ -3,7 +3,7 @@
 namespace Shevsky\Discount4Review\Domain\Wa\Review;
 
 use DateTime;
-use Shevsky\Discount4Review\Context\Context;
+use Exception;
 use Shevsky\Discount4Review\Domain\Wa\Factory;
 use Shevsky\Discount4Review\Persistence\Product\IProduct;
 use Shevsky\Discount4Review\Persistence\Review\IAuthor;
@@ -22,21 +22,43 @@ class Review implements IReview
 	private $author;
 
 	/**
-	 * @param int $id
+	 * @param mixed $data
+	 * @throws Exception
 	 */
-	public function __construct($id)
+	public function __construct($data)
 	{
-		$this->id = $id;
 		$this->product_reviews_model = new shopProductReviewsModel();
 		$this->review_model = new shopDiscount4reviewReviewModel();
 
-		$this->data = $this->product_reviews_model->getById($this->id);
-		$extend_data = $this->review_model->getById($this->id);
-		if (!is_array($extend_data))
+		if (is_numeric($data))
 		{
-			$extend_data = [];
+			$this->id = $data;
+			$this->data = $this->product_reviews_model->getById($this->id);
 		}
-		$this->data = array_merge($this->data, $extend_data);
+		elseif (is_array($data))
+		{
+			if (!isset($data['id']))
+			{
+				$data['id'] = 0;
+			}
+
+			$this->id = (int)$data['id'];
+			$this->data = $data;
+		}
+		else
+		{
+			throw new Exception('Неизвестные аргументы для построения экземпляра отзыва');
+		}
+
+		if ($this->id)
+		{
+			$extend_data = $this->review_model->getById($this->id);
+			if (!is_array($extend_data))
+			{
+				$extend_data = [];
+			}
+			$this->data = array_merge($this->data, $extend_data);
+		}
 	}
 
 	/**
