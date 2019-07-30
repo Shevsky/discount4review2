@@ -5,15 +5,15 @@ namespace Shevsky\Discount4Review\Persistence;
 interface IFactory
 {
 	/**
-	 * @param int $id
+	 * @param mixed $data
 	 * @return Product\IProduct
 	 */
-	public function createProduct($id);
+	public function createProduct($data);
 
 	/**
 	 * @param Product\IProduct $product
-	 * @param int $id
+	 * @param mixed $data
 	 * @return Product\ISku
 	 */
-	public function createSku(Product\IProduct $product, $id);
+	public function createSku(Product\IProduct $product, $data);
 }

@@ -2,6 +2,9 @@
 
 namespace Shevsky\Discount4Review\Persistence;
 
+use Shevsky\Discount4Review\Persistence\Product\IProduct;
+use Shevsky\Discount4Review\Persistence\Product\ISku;
+
 class Registry
 {
 	private $factory;
@@ -19,7 +22,7 @@ class Registry
 
 	/**
 	 * @param int $id
-	 * @return Product\IProduct
+	 * @return IProduct
 	 */
 	public function getProduct($id)
 	{
@@ -32,11 +35,20 @@ class Registry
 	}
 
 	/**
-	 * @param Product\IProduct $product
 	 * @param int $id
-	 * @return Product\ISku
+	 * @param IProduct $product
 	 */
-	public function getSku(Product\IProduct $product, $id)
+	public function setProduct($id, IProduct $product)
+	{
+		$this->products[$id] = $product;
+	}
+
+	/**
+	 * @param IProduct $product
+	 * @param int $id
+	 * @return ISku
+	 */
+	public function getSku(IProduct $product, $id)
 	{
 		$identify_key = "{$product->getId()}/{$id}";
 
@@ -46,5 +58,17 @@ class Registry
 		}
 
 		return $this->skus[$identify_key];
+	}
+
+	/**
+	 * @param IProduct $product
+	 * @param int $id
+	 * @param ISku $sku
+	 */
+	public function setSku(IProduct $product, $id, ISku $sku)
+	{
+		$identify_key = "{$product->getId()}/{$id}";
+
+		$this->skus[$identify_key] = $sku;
 	}
 }
