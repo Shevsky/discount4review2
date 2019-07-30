@@ -1,3 +1,76 @@
 {strip}
-	test my_order template
+	{$can_get_discount = $discount_value > 0}
+	{$can_get_bonus = $bonus_value > 0}
+	{$order = $params.order|default:[]}
+	{$items = $params.order.items|default:[]}
+	{$count_items = $items|count}
+
+	<div class="d4r-override">
+		<div class="d4r-my-order">
+			<div class="d4r-my-order__header">
+				<div class="d4r-my-order__header-line">
+					Желаете получить скидку на следующий заказ?
+				</div>
+				<div class="d4r-my-order__header-line">
+					Оставьте отзывы по
+					{' '}
+
+					<span class="d4r-my-order__header-subline j-d4r-my-order-header-subline-general{if $count_for_discount !== $count_items || $count_for_discount_done !== 0} modifier-hidden{/if}">
+						всем заказанным товарам
+					</span>
+
+					<span class="d4r-my-order__header-subline j-d4r-my-order-header-subline-general{if $count_for_discount === $count_items || $count_for_discount_done !== 0} modifier-hidden{/if}">
+						любым <span class="d4r-my-order__header-count-label j-d4r-my-order-count-for-discount">{$count_for_discount}</span> заказанным товарам
+					</span>
+
+					<span class="d4r-my-order__header-subline j-d4r-my-order-header-subline-left{if $count_for_discount_done === 0} modifier-hidden{/if}">
+						еще <span class="d4r-my-order__header-count-label j-d4r-my-order-count-for-discount-left">{$count_for_discount_left}</span> заказанным товарам
+					</span>
+
+					<span class="d4r-my-order__header-subline">
+						{' '}
+						и получите
+						{' '}
+						{if $can_get_discount}
+							купон на скидку <span class="d4r-my-order__header-count-label">{$discount_value}%</span>
+						{/if}
+						{if $can_get_discount && $can_get_bonus} и {/if}
+						{if $can_get_bonus}
+							<span class="d4r-my-order__header-count-label">{$bonus_value}</span> бонусных баллов на следующую покупку
+						{/if}
+					</span>
+				</div>
+			</div>
+
+			<div class="d4r-my-order__items">
+				{foreach $items as $item}
+					{if $item.type !== 'product'}
+						{continue}
+					{/if}
+
+					{$product = $wa->shop->product($item.product_id)}
+
+					<div class="d4r-my-order__item d4r-my-order-item" data-item_id="{$item.id}">
+						<div class="d4r-my-order-item">
+							<div class="d4r-my-order-item__name">
+								{$product.name|escape:'html'}
+							</div>
+							<div class="d4r-my-order-item__button-wrapper">
+								<a href="{$wa->getUrl('shop/frontend/productReviews', [
+									'product_url' => $product.url
+								])|escape}?d4r_item_id={$item.id}" class="d4r-my-order-item__button j-d4r-my-order-item-button">
+									Написать отзыв
+								</a>
+							</div>
+							<div class="d4r-my-order-item__product-link-wrapper">
+								<a href="{$wa->shop->productUrl($product)|escape}" class="d4r-my-order-item__product-link">
+									Перейти к товару
+								</a>
+							</div>
+						</div>
+					</div>
+				{/foreach}
+			</div>
+		</div>
+	</div>
 {/strip}
