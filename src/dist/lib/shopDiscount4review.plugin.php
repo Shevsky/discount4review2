@@ -2,6 +2,11 @@
 
 use Shevsky\Discount4Review\Autoloader;
 use Shevsky\Discount4Review\Context\Context;
+use Shevsky\Discount4Review\Domain\Wa\Factory;
+use Shevsky\Discount4Review\Domain\Wa\Handler\MyOrderHandler;
+use Shevsky\Discount4Review\Domain\Wa\Handler\ReviewAddBeforeHandler;
+use Shevsky\Discount4Review\Domain\Wa\Handler\ReviewsPageHandler;
+use Shevsky\Discount4Review\Domain\Wa\Product\Product;
 
 class shopDiscount4reviewPlugin extends shopPlugin
 {
@@ -60,20 +65,52 @@ class shopDiscount4reviewPlugin extends shopPlugin
 	 */
 	public function frontendMyOrderHandler($order)
 	{
-		if (!self::isEnabled() || !self::getContext()->getSettingsService()->storefront->getMyOrderAutoInjectStatus())
-		{
-			return '';
-		}
-
 		try
 		{
-			return self::getContext()->getFrontendService()->renderMyOrder([
-				'order' => $order
-			]);
+			return MyOrderHandler::dispatch($order);
 		}
 		catch (Exception $e)
 		{
 			return '';
+		}
+	}
+
+	/**
+	 * @param mixed $product
+	 * @return array
+	 */
+	public function frontendProductHandler($product)
+	{
+		try
+		{
+			ReviewsPageHandler::dispatch(Factory::getInstance()->createProduct($product));
+		}
+		catch (Exception $e)
+		{
+		}
+
+		return [];
+	}
+
+	/**
+	 * @param array $params
+	 */
+	public function frontendReviewAddBeforeHandler($params)
+	{
+		if (!is_array($params) || !array_key_exists('data', $params) || !array_key_exists('product', $params))
+		{
+			return;
+		}
+
+		try
+		{
+			ReviewAddBeforeHandler::dispatch(
+				Factory::getInstance()->createProduct($params['product']),
+				Factory::getInstance()->createReview($params['data'])
+			);
+		}
+		catch (Exception $e)
+		{
 		}
 	}
 
