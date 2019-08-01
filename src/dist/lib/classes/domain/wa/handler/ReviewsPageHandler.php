@@ -35,7 +35,7 @@ class ReviewsPageHandler extends Handler
 
 	private function storeItemId()
 	{
-		$key = 'd4r_review_item_id';
+		$key = 'd4r_review_order_item_id';
 
 		$stored_data = wa()->getStorage()->read($key);
 		if (!is_array($stored_data))
