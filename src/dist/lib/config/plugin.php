@@ -9,6 +9,6 @@ return array(
 	'handlers' => array(
 		'frontend_my_order' => 'frontendMyOrderHandler',
 		'frontend_product' => 'frontendProductHandler',
-		'frontend_review_add.before' => 'frontendReviewAddBeforeHandler'
+		'frontend_review_add.after' => 'frontendReviewAddAfterHandler'
 	)
 );

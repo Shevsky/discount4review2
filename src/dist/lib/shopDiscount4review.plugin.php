@@ -4,7 +4,7 @@ use Shevsky\Discount4Review\Autoloader;
 use Shevsky\Discount4Review\Context\Context;
 use Shevsky\Discount4Review\Domain\Wa\Factory;
 use Shevsky\Discount4Review\Domain\Wa\Handler\MyOrderHandler;
-use Shevsky\Discount4Review\Domain\Wa\Handler\ReviewAddBeforeHandler;
+use Shevsky\Discount4Review\Domain\Wa\Handler\ReviewAddAfterHandler;
 use Shevsky\Discount4Review\Domain\Wa\Handler\ReviewsPageHandler;
 use Shevsky\Discount4Review\Domain\Wa\Product\Product;
 
@@ -95,18 +95,25 @@ class shopDiscount4reviewPlugin extends shopPlugin
 	/**
 	 * @param array $params
 	 */
-	public function frontendReviewAddBeforeHandler($params)
+	public function frontendReviewAddAfterHandler($params)
 	{
-		if (!is_array($params) || !array_key_exists('data', $params) || !array_key_exists('product', $params))
+		if (!is_array($params) || !array_key_exists('data', $params) || !array_key_exists('product', $params) || !array_key_exists('id', $params))
 		{
 			return;
 		}
 
 		try
 		{
-			ReviewAddBeforeHandler::dispatch(
+			ReviewAddAfterHandler::dispatch(
 				Factory::getInstance()->createProduct($params['product']),
-				Factory::getInstance()->createReview($params['data'])
+				Factory::getInstance()->createReview(
+					array_merge(
+						$params['data'],
+						[
+							'id' => $params['id'],
+						]
+					)
+				)
 			);
 		}
 		catch (Exception $e)
