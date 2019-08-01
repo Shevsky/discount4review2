@@ -21,22 +21,19 @@ class Order implements IOrder
 	{
 		$this->order_model = new shopOrderModel();
 
-		if (is_array($data))
+		if (is_array($data) && array_key_exists('id', $data))
 		{
-			if (array_key_exists('id', $data))
-			{
-				$this->id = (int)$data['id'];
-				$this->data = $data;
-			}
-			else
-			{
-				throw new Exception('Неизвестные аргументы для построения экземпляра заказа');
-			}
+			$this->id = (int)$data['id'];
+			$this->data = $data;
 		}
 		elseif (is_numeric($data))
 		{
 			$this->id = (int)$data;
 			$this->data = $this->order_model->getOrder($this->id);
+		}
+		else
+		{
+			throw new Exception('Неизвестные аргументы для построения экземпляра заказа');
 		}
 	}
 

@@ -25,22 +25,19 @@ class OrderItem implements IOrderItem
 	{
 		$this->order_items_model = new shopOrderItemsModel();
 
-		if (is_array($data))
+		if (is_array($data) && array_key_exists('id', $data))
 		{
-			if (array_key_exists('id', $data))
-			{
-				$this->id = (int)$data['id'];
-				$this->data = $data;
-			}
-			else
-			{
-				throw new Exception('Неизвестные аргументы для построения экземпляра элемента заказа');
-			}
+			$this->id = (int)$data['id'];
+			$this->data = $data;
 		}
 		elseif (is_numeric($data))
 		{
 			$this->id = (int)$data;
 			$this->data = $this->order_items_model->getById($this->id);
+		}
+		else
+		{
+			throw new Exception('Неизвестные аргументы для построения экземпляра элемента заказа');
 		}
 
 		if ($this->data['type'] !== 'product')
