@@ -5,7 +5,9 @@ namespace Shevsky\Discount4Review\Domain\Wa\Review;
 use DateTime;
 use Exception;
 use Shevsky\Discount4Review\Domain\Wa\Factory;
+use Shevsky\Discount4Review\Persistence\Order\IOrderItem;
 use Shevsky\Discount4Review\Persistence\Product\IProduct;
+use Shevsky\Discount4Review\Persistence\Product\ISku;
 use Shevsky\Discount4Review\Persistence\Review\IAuthor;
 use Shevsky\Discount4Review\Persistence\Review\IImage;
 use Shevsky\Discount4Review\Persistence\Review\IReview;
@@ -18,6 +20,9 @@ class Review implements IReview
 	private $product_reviews_model;
 	private $review_model;
 	private $data;
+	private $product;
+	private $sku;
+	private $order_item;
 
 	private $author;
 
@@ -74,9 +79,58 @@ class Review implements IReview
 	 */
 	public function getProduct()
 	{
-		$product_id = (int)$this->data['product_id'];
+		if (!isset($this->product))
+		{
+			$product_id = (int)$this->data['product_id'];
 
-		return Factory::getInstance()->createProduct($product_id);
+			$this->product = Factory::getInstance()->createProduct($product_id);
+		}
+
+		return $this->product;
+	}
+
+	/**
+	 * @return ISku|null
+	 */
+	public function getSku()
+	{
+		if (!isset($this->sku))
+		{
+			if (isset($this->data['sku_id']))
+			{
+				$sku_id = (int)$this->data['sku_id'];
+
+				$this->sku = Factory::getInstance()->createSku($this->getProduct(), $sku_id);
+			}
+			else
+			{
+				$this->sku = false;
+			}
+		}
+
+		return $this->sku === false ? null : $this->sku;
+	}
+
+	/**
+	 * @return IOrderItem|null
+	 */
+	public function getOrderItem()
+	{
+		if (!isset($this->order_item))
+		{
+			if (isset($this->data['item_id']))
+			{
+				$item_id = (int)$this->data['item_id'];
+
+				$this->order_item = Factory::getInstance()->createOrderItem($item_id);
+			}
+			else
+			{
+				$this->order_item = false;
+			}
+		}
+
+		return $this->order_item === false ? null : $this->order_item;
 	}
 
 	/**

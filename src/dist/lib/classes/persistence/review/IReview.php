@@ -3,7 +3,9 @@
 namespace Shevsky\Discount4Review\Persistence\Review;
 
 use DateTime;
+use Shevsky\Discount4Review\Persistence\Order\IOrderItem;
 use Shevsky\Discount4Review\Persistence\Product\IProduct;
+use Shevsky\Discount4Review\Persistence\Product\ISku;
 
 interface IReview
 {
@@ -16,6 +18,16 @@ interface IReview
 	 * @return IProduct
 	 */
 	public function getProduct();
+
+	/**
+	 * @return ISku|null
+	 */
+	public function getSku();
+
+	/**
+	 * @return IOrderItem|null
+	 */
+	public function getOrderItem();
 
 	/**
 	 * Возвращает источник - откуда был добавлен отзыв
