@@ -19,6 +19,7 @@ class OrderItem implements IOrderItem
 
 	/**
 	 * @param mixed $data
+	 * @throws Exception
 	 */
 	public function __construct($data)
 	{
@@ -58,6 +59,7 @@ class OrderItem implements IOrderItem
 
 	/**
 	 * @return IProduct
+	 * @throws Exception
 	 */
 	public function getProduct()
 	{
@@ -73,6 +75,7 @@ class OrderItem implements IOrderItem
 
 	/**
 	 * @return ISku
+	 * @throws Exception
 	 */
 	public function getSku()
 	{
