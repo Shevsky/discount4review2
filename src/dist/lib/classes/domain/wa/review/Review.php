@@ -20,6 +20,7 @@ class Review implements IReview
 	private $product_reviews_model;
 	private $review_model;
 	private $data;
+	private $extend_data;
 	private $product;
 	private $sku;
 	private $order_item;
@@ -57,12 +58,11 @@ class Review implements IReview
 
 		if ($this->id)
 		{
-			$extend_data = $this->review_model->getById($this->id);
-			if (!is_array($extend_data))
+			$this->extend_data = $this->review_model->getById($this->id);
+			if (!is_array($this->extend_data))
 			{
-				$extend_data = [];
+				$this->extend_data = [];
 			}
-			$this->data = array_merge($this->data, $extend_data);
 		}
 	}
 
@@ -76,6 +76,7 @@ class Review implements IReview
 
 	/**
 	 * @return IProduct
+	 * @throws Exception
 	 */
 	public function getProduct()
 	{
@@ -91,14 +92,15 @@ class Review implements IReview
 
 	/**
 	 * @return ISku|null
+	 * @throws Exception
 	 */
 	public function getSku()
 	{
 		if (!isset($this->sku))
 		{
-			if (isset($this->data['sku_id']))
+			if (isset($this->extend_data['sku_id']))
 			{
-				$sku_id = (int)$this->data['sku_id'];
+				$sku_id = (int)$this->extend_data['sku_id'];
 
 				$this->sku = Factory::getInstance()->createSku($this->getProduct(), $sku_id);
 			}
@@ -112,17 +114,27 @@ class Review implements IReview
 	}
 
 	/**
+	 * @param ISku $sku
+	 */
+	public function setSku(ISku $sku)
+	{
+		$this->sku = $sku;
+		$this->extend_data['sku_id'] = $sku->getId();
+	}
+
+	/**
 	 * @return IOrderItem|null
+	 * @throws Exception
 	 */
 	public function getOrderItem()
 	{
 		if (!isset($this->order_item))
 		{
-			if (isset($this->data['item_id']))
+			if (isset($this->extend_data['order_item_id']))
 			{
-				$item_id = (int)$this->data['item_id'];
+				$order_item_id = (int)$this->extend_data['order_item_id'];
 
-				$this->order_item = Factory::getInstance()->createOrderItem($item_id);
+				$this->order_item = Factory::getInstance()->createOrderItem($order_item_id);
 			}
 			else
 			{
@@ -134,15 +146,24 @@ class Review implements IReview
 	}
 
 	/**
+	 * @param IOrderItem $order_item
+	 */
+	public function setOrderItem(IOrderItem $order_item)
+	{
+		$this->order_item = $order_item;
+		$this->extend_data['order_item_id'] = $order_item->getId();
+	}
+
+	/**
 	 * Возвращает источник - откуда был добавлен отзыв
 	 * @return string[order]
 	 * @return string[product]
 	 */
 	public function getOrigin()
 	{
-		if (isset($this->data['origin']))
+		if (isset($this->extend_data['origin']))
 		{
-			return $this->data['origin'];
+			return $this->extend_data['origin'];
 		}
 
 		return 'product';
@@ -204,5 +225,18 @@ class Review implements IReview
 	public function getImages()
 	{
 		return [];
+	}
+
+	public function save()
+	{
+		$this->review_model->insert(
+			array_merge(
+				[
+					'id' => $this->getId(),
+				],
+				$this->extend_data
+			),
+			1
+		);
 	}
 }
