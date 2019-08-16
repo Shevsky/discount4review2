@@ -111,13 +111,13 @@ module.exports = {
 	plugins: [extract],
 	resolve: {
 		alias: {
-			backend: path.resolve(__dirname, '../src/ts/backend'),
-			frontend: path.resolve(__dirname, '../src/ts/frontend'),
-			settings: path.resolve(__dirname, '../src/ts/settings'),
-			lib: path.resolve(__dirname, '../src/ts/lib'),
-			env: path.resolve(__dirname, '../src/ts/env'),
-			util: path.resolve(__dirname, '../src/ts/util'),
-			vendor: path.resolve(__dirname, '../src/ts/vendor')
+			backend: path.resolve(__dirname, 'src/ts/backend'),
+			frontend: path.resolve(__dirname, 'src/ts/frontend'),
+			settings: path.resolve(__dirname, 'src/ts/settings'),
+			lib: path.resolve(__dirname, 'src/ts/lib'),
+			env: path.resolve(__dirname, 'src/ts/env'),
+			util: path.resolve(__dirname, 'src/ts/util'),
+			vendor: path.resolve(__dirname, 'src/ts/vendor')
 		},
 		extensions: ['.js', '.json', '.ts', '.tsx']
 	},
