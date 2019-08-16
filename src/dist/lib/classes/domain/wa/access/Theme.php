@@ -225,17 +225,20 @@ class Theme implements ITheme
 		if (!in_array('storefronts', $excluded_rows))
 		{
 			$rows['storefronts'] = array_map(
-				function($storefront) {
-					/**
-					 * @var IStorefront $storefront
-					 */
-
-					return $storefront->toArray(['Theme']);
-				},
+				[__CLASS__, 'storefrontToArray'],
 				$this->getStorefronts()
 			);
 		}
 
 		return $rows;
+	}
+
+	/**
+	 * @param IStorefront $storefront
+	 * @return mixed[]
+	 */
+	private function storefrontToArray(IStorefront $storefront)
+	{
+		return $storefront->toArray(['Theme']);
 	}
 }

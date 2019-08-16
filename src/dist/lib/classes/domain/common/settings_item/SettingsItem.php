@@ -83,10 +83,17 @@ class SettingsItem implements ISettingsItem
 	public function toArray()
 	{
 		return array_map(
-			function($value) {
-				return SettingTransformerUtil::transform($value, $this->type);
-			},
+			[__CLASS__, 'transformSettingValue'],
 			$this->values
 		);
+	}
+
+	/**
+	 * @param mixed $value
+	 * @return mixed
+	 */
+	private function transformSettingValue($value)
+	{
+		return SettingTransformerUtil::transform($value, $this->type);
 	}
 }

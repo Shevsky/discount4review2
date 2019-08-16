@@ -56,9 +56,7 @@ class Order implements IOrder
 			{
 				$this->items = array_values(
 					array_map(
-						function($_item) {
-							return new OrderItem($_item);
-						},
+						[__CLASS__, 'buildOrderItem'],
 						$this->data['items']
 					)
 				);
@@ -70,5 +68,15 @@ class Order implements IOrder
 		}
 
 		return $this->items;
+	}
+
+	/**
+	 * @param mixed[] $item
+	 * @return OrderItem
+	 * @throws Exception
+	 */
+	private function buildOrderItem(array $item)
+	{
+		return new OrderItem($item);
 	}
 }

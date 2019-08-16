@@ -81,14 +81,7 @@ class Product implements IProduct
 	{
 		return array_values(
 			array_map(
-				function($_sku) {
-					/**
-					 * @var Sku $sku
-					 */
-					$sku = Factory::getInstance()->createSku($this, $_sku);
-
-					return $sku;
-				},
+				[__CLASS__, 'buildSku'],
 				$this->product->skus
 			)
 		);
@@ -108,5 +101,14 @@ class Product implements IProduct
 	public function getCurrency()
 	{
 		return $this->product->currency;
+	}
+
+	/**
+	 * @param $sku
+	 * @return Sku
+	 */
+	private function buildSku($sku)
+	{
+		return Factory::getInstance()->createSku($this, $sku);
 	}
 }

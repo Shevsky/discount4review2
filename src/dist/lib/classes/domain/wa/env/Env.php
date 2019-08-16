@@ -57,14 +57,6 @@ class Env implements IEnv
 	}
 
 	/**
-	 * @param IStorefront[] $storefronts
-	 */
-	protected function sortStorefronts(array &$storefronts)
-	{
-
-	}
-
-	/**
 	 * @return IStorefront[]
 	 */
 	public function getStorefronts()
@@ -122,22 +114,6 @@ class Env implements IEnv
 	}
 
 	/**
-	 * @param ITheme[]
-	 */
-	protected function sortThemes(array &$themes)
-	{
-		usort(
-			$themes,
-			function($theme) {
-				/**
-				 * @var Theme $theme
-				 */
-				return !$theme->hasStorefronts();
-			}
-		);
-	}
-
-	/**
 	 * @return ITheme[]
 	 */
 	public function getThemes()
@@ -185,5 +161,33 @@ class Env implements IEnv
 		}
 
 		return $this->current_theme;
+	}
+
+	/**
+	 * @param IStorefront[] $storefronts
+	 */
+	protected function sortStorefronts(array &$storefronts)
+	{
+
+	}
+
+	/**
+	 * @param ITheme[]
+	 */
+	protected function sortThemes(array &$themes)
+	{
+		usort(
+			$themes,
+			[__CLASS__, 'sortThemesCallable']
+		);
+	}
+
+	/**
+	 * @param Theme $theme
+	 * @return bool
+	 */
+	private function sortThemesCallable(Theme $theme)
+	{
+		return !$theme->hasStorefronts();
 	}
 }

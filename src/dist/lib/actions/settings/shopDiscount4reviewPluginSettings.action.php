@@ -50,21 +50,11 @@ class shopDiscount4reviewPluginSettingsAction extends waViewAction
 
 		$params['plugin_url'] = Context::getPluginUrl();
 		$params['storefronts'] = array_map(
-			function($storefront) {
-				/**
-				 * @var IStorefront $storefront
-				 */
-				return $storefront->toArray();
-			},
+			[__CLASS__, 'storefrontToArray'],
 			$this->context->getEnv()->getStorefronts()
 		);
 		$params['themes'] = array_map(
-			function($theme) {
-				/**
-				 * @var ITheme $theme
-				 */
-				return $theme->toArray();
-			},
+			[__CLASS__, 'themeToArray'],
 			$this->context->getEnv()->getThemes()
 		);
 	}
@@ -84,6 +74,24 @@ class shopDiscount4reviewPluginSettingsAction extends waViewAction
 	}
 
 	/**
+	 * @param IStorefront $storefront
+	 * @return mixed[]
+	 */
+	private function storefrontToArray(IStorefront $storefront)
+	{
+		return $storefront->toArray();
+	}
+
+	/**
+	 * @param ITheme $theme
+	 * @return mixed[]
+	 */
+	private function themeToArray(ITheme $theme)
+	{
+		return $theme->toArray();
+	}
+
+	/**
 	 * @param ISettingsItem[] $setting_items
 	 * @return mixed[] = [
 	 *  $setting => [
@@ -95,13 +103,17 @@ class shopDiscount4reviewPluginSettingsAction extends waViewAction
 	private function settingsToArray(array $setting_items)
 	{
 		return array_map(
-			function($settings_item) {
-				/**
-				 * @var ISettingsItem $settings_item
-				 */
-				return $settings_item->toArray();
-			},
+			[__CLASS__, 'settingsItemToArray'],
 			$setting_items
 		);
+	}
+
+	/**
+	 * @param ISettingsItem $settings_item
+	 * @return mixed[]
+	 */
+	private function settingsItemToArray(ISettingsItem $settings_item)
+	{
+		return $settings_item->toArray();
 	}
 }

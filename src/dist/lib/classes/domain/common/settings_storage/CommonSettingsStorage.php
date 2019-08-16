@@ -194,14 +194,17 @@ abstract class CommonSettingsStorage implements ISettingsStorage
 		$settings = $this->getSettings();
 
 		return array_map(
-			function($setting) {
-				/**
-				 * @var ISettingsItem $setting
-				 */
-
-				return $setting->toArray();
-			},
+			[__CLASS__, 'settingsItemToArray'],
 			$settings
 		);
+	}
+
+	/**
+	 * @param ISettingsItem $settings_item
+	 * @return mixed[]
+	 */
+	private function settingsItemToArray(ISettingsItem $settings_item)
+	{
+		return $settings_item->toArray();
 	}
 }
