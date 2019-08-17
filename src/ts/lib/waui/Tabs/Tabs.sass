@@ -1,0 +1,27 @@
+.tabs
+	display: block
+
+	&__switcher
+		display: flex
+		align-items: center
+		border-bottom: 1px solid #ddd
+		margin: 10px 0 15px
+
+	&__switcher-item
+		display: block
+		height: 30px
+		line-height: 30px
+		padding: 0 0.8em 0
+		background-color: #eee
+		border: 1px solid #ddd
+		position: relative
+		top: 1px
+		margin-right: 5px
+
+		&:last-child
+			margin-right: 0
+
+		&_selected
+			background-color: #fff
+			border-bottom-color: #fff
+			color: #000
