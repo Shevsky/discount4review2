@@ -6,6 +6,7 @@ import ContextData from 'settings/context/ContextData';
 import GeneralSettings from 'settings/components/GeneralSettings/GeneralSettings';
 import Header from 'lib/waui/Header/Header';
 import { observer } from 'mobx-react';
+import SpecificSettings from 'settings/components/SpecificSettings/SpecificSettings';
 
 interface ISettingsScreenProps {
 	contextData: ContextData;
@@ -23,7 +24,7 @@ export default class SettingsScreen extends Component<ISettingsScreenProps> {
 				<Context.Provider value={this.context_data}>
 					<GeneralSettings />
 
-					{this.status && <div>...</div>}
+					<SpecificSettings />
 				</Context.Provider>
 			</div>
 		);
