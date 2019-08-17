@@ -34,7 +34,7 @@ export default class InputText extends Component<IInputTextPropsFinal, IInputTex
 	render(): ReactElement<HTMLInputElement> {
 		const { className, refNode, params, ...props } = this.props;
 		const inputClass = ClassNames(Styles.inputText, {
-			className: !!className
+			[className]: !!className
 		});
 
 		return (
