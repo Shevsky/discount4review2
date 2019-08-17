@@ -31,6 +31,7 @@ export default class Select extends Component<{
 			widthAuto = false,
 			short = false,
 			value,
+			params,
 			...props
 		} = this.props;
 		const selectClass = ClassNames(Styles.select, {

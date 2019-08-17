@@ -12,7 +12,7 @@ export default class Checkbox extends Component<{
 	onChange: (checked: boolean, params?: any) => void;
 }> {
 	render(): ReactElement<any> {
-		const { checked, children, className, refNode, hint, ...props } = this.props;
+		const { checked, children, className, refNode, hint, params, ...props } = this.props;
 		const labelClass = ClassNames(Styles.checkbox, {
 			[className]: !!className
 		});

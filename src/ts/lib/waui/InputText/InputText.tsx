@@ -29,7 +29,7 @@ export default class InputText extends Component<IInputTextProps, IInputTextStat
 	}
 
 	render(): ReactElement<HTMLInputElement> {
-		const { className, refNode, ...props } = this.props;
+		const { className, refNode, params, ...props } = this.props;
 		const inputClass = ClassNames(Styles.inputText, {
 			className: !!className
 		});
