@@ -123,7 +123,7 @@ class Env implements IEnv
 			$theme_util = new ThemeWaUtil($this->wa_env);
 			$wa_themes = $theme_util->getThemes();
 
-			$this->themes = array_map(
+			$this->themes = array_values(array_map(
 				function($wa_theme) use ($theme_util) {
 					/**
 					 * @var waTheme $wa_theme
@@ -135,7 +135,7 @@ class Env implements IEnv
 					return $theme;
 				},
 				$wa_themes
-			);
+			));
 			$this->sortThemes($this->themes);
 			Context::dispatchEvent('env.themes', $this->themes);
 		}
