@@ -4,24 +4,29 @@ import ClassNames from 'classnames';
 
 type TSelectValue = string | number;
 
-interface ISelectOption {
+export interface ISelectOption {
 	value: TSelectValue;
 	label: string;
 	[prop: string]: any;
 }
 
-export default class Select extends Component<{
-	options: ISelectOption[];
+export interface ISelectProps {
 	className?: string;
 	refNode?: RefObject<any>;
-	value: TSelectValue;
 	hasEmptyOption?: boolean;
 	widthAuto?: boolean;
 	short?: boolean;
+	[prop: string]: any;
+}
+
+interface ISelectPropsFinal extends ISelectProps {
+	options: ISelectOption[];
+	value: TSelectValue;
 	params?: any;
 	onChange: (value: TSelectValue, params?: any) => void;
-	[prop: string]: any;
-}> {
+}
+
+export default class Select extends Component<ISelectPropsFinal> {
 	render(): ReactElement<HTMLSelectElement> {
 		const {
 			options = [],

@@ -5,21 +5,24 @@ import ClassNames from 'classnames';
 type TInputTextValue = string | number;
 type TInputTextType = 'text' | 'password' | 'int' | 'float';
 
-interface IInputTextProps {
+export interface IInputTextProps {
 	className?: string;
 	refNode?: RefObject<any>;
-	value: TInputTextValue;
 	type?: TInputTextType;
+	[prop: string]: any;
+}
+
+interface IInputTextPropsFinal extends IInputTextProps {
+	value: TInputTextValue;
 	params?: any;
 	onChange: (value: TInputTextValue, params?: any) => void;
-	[prop: string]: any;
 }
 
 interface IInputTextState {
 	value: TInputTextValue;
 }
 
-export default class InputText extends Component<IInputTextProps, IInputTextState> {
+export default class InputText extends Component<IInputTextPropsFinal, IInputTextState> {
 	constructor(props) {
 		super(props);
 
@@ -47,7 +50,7 @@ export default class InputText extends Component<IInputTextProps, IInputTextStat
 		);
 	}
 
-	componentWillReceiveProps(nextProps: Readonly<IInputTextProps>) {
+	componentWillReceiveProps(nextProps: Readonly<IInputTextPropsFinal>) {
 		if (nextProps.value !== this.value) {
 			this.value = nextProps.value;
 		}

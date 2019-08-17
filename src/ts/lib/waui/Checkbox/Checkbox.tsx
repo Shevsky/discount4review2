@@ -2,15 +2,20 @@ import React, { ChangeEvent, Component, ReactElement, ReactNode, RefObject } fro
 import Styles from './Checkbox.sass';
 import ClassNames from 'classnames';
 
-export default class Checkbox extends Component<{
+export interface ICheckboxProps {
 	className?: string;
 	refNode?: RefObject<any>;
 	hint?: ReactNode;
-	checked: boolean;
 	children?: ReactNode;
-	params?: any;
+	[prop: string]: any;
+}
+
+interface ICheckboxPropsFinal extends ICheckboxProps {
+	checked: boolean;
 	onChange: (checked: boolean, params?: any) => void;
-}> {
+}
+
+export default class Checkbox extends Component<ICheckboxPropsFinal> {
 	render(): ReactElement<any> {
 		const { checked, children, className, refNode, hint, params, ...props } = this.props;
 		const labelClass = ClassNames(Styles.checkbox, {
