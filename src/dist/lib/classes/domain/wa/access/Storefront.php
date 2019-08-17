@@ -91,12 +91,12 @@ class Storefront implements IStorefront
 	private function getThemeId()
 	{
 		$route = $this->getShopRoute();
-		if (!isset($route['Theme']))
+		if (!isset($route['theme']))
 		{
 			return null;
 		}
 
-		return $route['Theme'];
+		return $route['theme'];
 	}
 
 	/**
@@ -133,7 +133,7 @@ class Storefront implements IStorefront
 			}
 			else
 			{
-				$rows['theme'] = $theme->toArray(['storefronts']);
+				$rows['theme'] = $theme->toArray(['storefronts', 'path']);
 			}
 		}
 
