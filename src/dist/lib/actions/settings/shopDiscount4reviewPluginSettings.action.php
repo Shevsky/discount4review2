@@ -57,6 +57,8 @@ class shopDiscount4reviewPluginSettingsAction extends waViewAction
 			[__CLASS__, 'themeToArray'],
 			$this->context->getEnv()->getThemes()
 		);
+
+		$this->view->assign('params', $params);
 	}
 
 	private function assignVars()
@@ -88,7 +90,7 @@ class shopDiscount4reviewPluginSettingsAction extends waViewAction
 	 */
 	private function themeToArray(ITheme $theme)
 	{
-		return $theme->toArray();
+		return $theme->toArray(['path']);
 	}
 
 	/**
