@@ -50,7 +50,9 @@ class Theme implements ITheme
 	 */
 	public function getDescription()
 	{
-		return $this->theme->getDescription();
+		$description = $this->theme->getDescription();
+
+		return is_string($description) ? $description : '';
 	}
 
 	/**
@@ -90,7 +92,7 @@ class Theme implements ITheme
 	 */
 	public function getStorefronts()
 	{
-		return DefineUtil::getInstance($this->env)->defineStorefronts($this->getStorefrontIds());
+		return DefineUtil::getInstance($this->env)->defineStorefronts(...$this->getStorefrontIds());
 	}
 
 	/**
