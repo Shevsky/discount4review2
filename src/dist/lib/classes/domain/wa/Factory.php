@@ -49,6 +49,7 @@ class Factory implements IFactory
 	 * @param IProduct $product
 	 * @param mixed $data
 	 * @return Sku
+	 * @throws Exception
 	 */
 	public function createSku(IProduct $product, $data)
 	{
