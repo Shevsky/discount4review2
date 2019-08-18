@@ -2,6 +2,8 @@
 
 namespace Shevsky\Discount4Review\Persistence\Product;
 
+use Shevsky\Discount4Review\Persistence\Access\ICurrency;
+
 interface ISku
 {
 	/**
@@ -20,7 +22,7 @@ interface ISku
 	public function getName();
 
 	/**
-	 * @return string
+	 * @return ICurrency
 	 */
 	public function getCurrency();
 }

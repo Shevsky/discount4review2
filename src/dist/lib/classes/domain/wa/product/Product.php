@@ -5,6 +5,7 @@ namespace Shevsky\Discount4Review\Domain\Wa\Product;
 use Exception;
 use Shevsky\Discount4Review\Context\Context;
 use Shevsky\Discount4Review\Domain\Wa\Factory;
+use Shevsky\Discount4Review\Persistence\Access\ICurrency;
 use Shevsky\Discount4Review\Persistence\Product\IProduct;
 use Shevsky\Discount4Review\Persistence\Product\ISku;
 use Shevsky\Discount4Review\Persistence\Review\IReview;
@@ -96,11 +97,11 @@ class Product implements IProduct
 	}
 
 	/**
-	 * @return string
+	 * @return ICurrency
 	 */
 	public function getCurrency()
 	{
-		return $this->product->currency;
+		return Context::getInstance()->getCurrencyRegistry()->getByCode($this->product->currency);
 	}
 
 	/**

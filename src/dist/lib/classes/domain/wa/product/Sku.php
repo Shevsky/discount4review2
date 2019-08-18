@@ -3,6 +3,7 @@
 namespace Shevsky\Discount4Review\Domain\Wa\Product;
 
 use Exception;
+use Shevsky\Discount4Review\Persistence\Access\ICurrency;
 use Shevsky\Discount4Review\Persistence\Product\ISku;
 use shopProductSkusModel;
 
@@ -74,7 +75,7 @@ class Sku implements ISku
 	}
 
 	/**
-	 * @return string
+	 * @return ICurrency
 	 */
 	public function getCurrency()
 	{

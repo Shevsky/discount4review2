@@ -2,6 +2,7 @@
 
 namespace Shevsky\Discount4Review\Persistence\Product;
 
+use Shevsky\Discount4Review\Persistence\Access\ICurrency;
 use Shevsky\Discount4Review\Persistence\Review\IReview;
 
 interface IProduct
@@ -32,7 +33,7 @@ interface IProduct
 	public function getReviews();
 
 	/**
-	 * @return string
+	 * @return ICurrency
 	 */
 	public function getCurrency();
 }
