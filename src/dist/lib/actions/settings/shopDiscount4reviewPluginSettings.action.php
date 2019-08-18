@@ -101,10 +101,14 @@ class shopDiscount4reviewPluginSettingsAction extends waViewAction
 	/**
 	 * @param ICurrency $currency
 	 * @return mixed[]
+	 * @throws Exception
 	 */
 	private function currencyToArray(ICurrency $currency)
 	{
-		return $currency->toArray();
+		$currency_array = $currency->toArray();
+		$currency_array['current'] = $this->context->getEnv()->getCurrentCurrency() === $currency;
+
+		return $currency_array;
 	}
 
 	/**
