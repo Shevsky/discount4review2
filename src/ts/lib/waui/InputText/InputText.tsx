@@ -9,6 +9,7 @@ export interface IInputTextProps {
 	className?: string;
 	refNode?: RefObject<any>;
 	type?: TInputTextType;
+	short?: boolean;
 	[prop: string]: any;
 }
 
@@ -32,9 +33,10 @@ export default class InputText extends Component<IInputTextPropsFinal, IInputTex
 	}
 
 	render(): ReactElement<HTMLInputElement> {
-		const { className, refNode, params, ...props } = this.props;
+		const { className, refNode, short = false, params, ...props } = this.props;
 		const inputClass = ClassNames(Styles.inputText, {
-			[className]: !!className
+			[className]: !!className,
+			[Styles.inputText_short]: short
 		});
 
 		return (
