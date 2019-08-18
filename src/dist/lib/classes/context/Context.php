@@ -8,7 +8,6 @@ use Shevsky\Discount4Review\Domain\Wa\Env\Env;
 use Shevsky\Discount4Review\Domain\Wa\Factory;
 use Shevsky\Discount4Review\Domain\Wa\Util\EventUtil;
 use Shevsky\Discount4Review\Domain\Wa\Util\RoutingUtil;
-use Shevsky\Discount4Review\Persistence\Registry;
 use Shevsky\Discount4Review\Service\FrontendService;
 use Shevsky\Discount4Review\Service\SettingsService;
 use shopDiscount4reviewBasicSettingsModel;
@@ -23,7 +22,6 @@ class Context
 
 	private $plugin;
 	private $factory;
-	private $registry;
 	private $env;
 	private $basic_settings_storage;
 	private $storefront_settings_storage;
@@ -71,19 +69,6 @@ class Context
 		}
 
 		return $this->factory;
-	}
-
-	/**
-	 * @return Registry
-	 */
-	public function getRegistry()
-	{
-		if (!isset($this->registry))
-		{
-			$this->registry = new Registry($this->getFactory());
-		}
-
-		return $this->registry;
 	}
 
 	/**
