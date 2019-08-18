@@ -1,6 +1,7 @@
 <?php
 
 use Shevsky\Discount4Review\Context\Context;
+use Shevsky\Discount4Review\Persistence\Access\ICurrency;
 use Shevsky\Discount4Review\Persistence\Access\IStorefront;
 use Shevsky\Discount4Review\Persistence\Access\ITheme;
 use Shevsky\Discount4Review\Persistence\Settings\ISettingsItem;
@@ -57,6 +58,10 @@ class shopDiscount4reviewPluginSettingsAction extends waViewAction
 			[__CLASS__, 'themeToArray'],
 			$this->context->getEnv()->getThemes()
 		);
+		$params['currencies'] = array_map(
+			[__CLASS__, 'currencyToArray'],
+			$this->context->getEnv()->getCurrencies()
+		);
 
 		$this->view->assign('params', $params);
 	}
@@ -91,6 +96,15 @@ class shopDiscount4reviewPluginSettingsAction extends waViewAction
 	private function themeToArray(ITheme $theme)
 	{
 		return $theme->toArray(['path']);
+	}
+
+	/**
+	 * @param ICurrency $currency
+	 * @return mixed[]
+	 */
+	private function currencyToArray(ICurrency $currency)
+	{
+		return $currency->toArray();
 	}
 
 	/**
