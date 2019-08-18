@@ -3,6 +3,7 @@
 namespace Shevsky\Discount4Review\Util;
 
 use Shevsky\Discount4Review\Domain\Wa\Env\Env;
+use Shevsky\Discount4Review\Persistence\Access\ICurrency;
 use Shevsky\Discount4Review\Persistence\Access\IStorefront;
 use Shevsky\Discount4Review\Persistence\Access\ITheme;
 use Shevsky\Discount4Review\Persistence\Env\IEnv;
@@ -108,5 +109,40 @@ class DefineUtil
 		}
 
 		return current($defined_themes);
+	}
+
+	/**
+	 * @param string[] $currency_ids
+	 * @return ICurrency[]
+	 */
+	public function defineCurrencies(...$currency_ids)
+	{
+		$currencies = $this->env->getCurrencies();
+
+		return array_filter(
+			$currencies,
+			function($currency) use ($currency_ids) {
+				/**
+				 * @var ICurrency $currency
+				 */
+
+				return in_array($currency->getCode(), $currency_ids);
+			}
+		);
+	}
+
+	/**
+	 * @param string $currency_id
+	 * @return ICurrency
+	 */
+	public function defineCurrency($currency_id)
+	{
+		$defined_currencies = $this->defineCurrencies($currency_id);
+		if (empty($defined_currencies))
+		{
+			return null;
+		}
+
+		return current($defined_currencies);
 	}
 }
