@@ -3,6 +3,7 @@
 namespace Shevsky\Discount4Review\Domain\Wa\Env;
 
 use Shevsky\Discount4Review\Context\Context;
+use Shevsky\Discount4Review\Domain\Wa\Access\Currency;
 use Shevsky\Discount4Review\Domain\Wa\Access\Storefront;
 use Shevsky\Discount4Review\Domain\Wa\Access\Theme;
 use Shevsky\Discount4Review\Persistence\Access\ICurrency;
@@ -197,9 +198,14 @@ class Env implements IEnv
 	{
 		if (!isset($this->current_currency))
 		{
-			$data = $this->wa_env->getCurrencyData();
+			$currency_code = $this->wa_env->getCurrencyCode();
 
-			$this->current_currency = $this->currencyDataToCurrency($data);
+			/**
+			 * @var Currency $current_storefront
+			 */
+			$current_currency = $this->define_util->defineCurrency($currency_code);
+
+			$this->current_currency = $current_currency;
 		}
 
 		return $this->current_currency;
