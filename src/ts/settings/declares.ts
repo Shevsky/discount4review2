@@ -34,6 +34,7 @@ interface ICurrency {
 	decimal_point: string;
 	frac_digits: number;
 	thousands_sep: string;
+	current?: boolean;
 }
 
 interface IGlobalParams {
