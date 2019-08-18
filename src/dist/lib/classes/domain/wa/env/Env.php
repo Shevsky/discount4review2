@@ -5,6 +5,7 @@ namespace Shevsky\Discount4Review\Domain\Wa\Env;
 use Shevsky\Discount4Review\Context\Context;
 use Shevsky\Discount4Review\Domain\Wa\Access\Storefront;
 use Shevsky\Discount4Review\Domain\Wa\Access\Theme;
+use Shevsky\Discount4Review\Persistence\Access\ICurrency;
 use Shevsky\Discount4Review\Persistence\Access\IStorefront;
 use Shevsky\Discount4Review\Persistence\Access\ITheme;
 use Shevsky\Discount4Review\Persistence\Env\IEnv;
@@ -22,8 +23,10 @@ class Env implements IEnv
 	private $define_util;
 	private $storefronts;
 	private $themes;
+	private $currencies;
 	private $current_storefront;
 	private $current_theme;
+	private $current_currency;
 
 	private static $self;
 
@@ -123,19 +126,21 @@ class Env implements IEnv
 			$theme_util = new ThemeWaUtil($this->wa_env);
 			$wa_themes = $theme_util->getThemes();
 
-			$this->themes = array_values(array_map(
-				function($wa_theme) use ($theme_util) {
-					/**
-					 * @var waTheme $wa_theme
-					 */
+			$this->themes = array_values(
+				array_map(
+					function($wa_theme) use ($theme_util) {
+						/**
+						 * @var waTheme $wa_theme
+						 */
 
-					$theme = new Theme($wa_theme, $this, $this->wa_env);
-					$theme->setStorefrontIds($theme_util->getStorefrontIds($wa_theme));
+						$theme = new Theme($wa_theme, $this, $this->wa_env);
+						$theme->setStorefrontIds($theme_util->getStorefrontIds($wa_theme));
 
-					return $theme;
-				},
-				$wa_themes
-			));
+						return $theme;
+					},
+					$wa_themes
+				)
+			);
 			$this->sortThemes($this->themes);
 			Context::dispatchEvent('env.themes', $this->themes);
 		}
@@ -164,6 +169,43 @@ class Env implements IEnv
 	}
 
 	/**
+	 * @return ICurrency[]
+	 * @throws Exception
+	 */
+	public function getCurrencies()
+	{
+		if (!isset($this->currencies))
+		{
+			$currencies = $this->wa_env->getCurrencies();
+
+			$this->currencies = array_values(
+				array_map(
+					[__CLASS__, 'currencyDataToCurrency'],
+					$currencies
+				)
+			);
+		}
+
+		return $this->currencies;
+	}
+
+	/**
+	 * @return ICurrency
+	 * @throws Exception
+	 */
+	public function getCurrentCurrency()
+	{
+		if (!isset($this->current_currency))
+		{
+			$data = $this->wa_env->getCurrencyData();
+
+			$this->current_currency = $this->currencyDataToCurrency($data);
+		}
+
+		return $this->current_currency;
+	}
+
+	/**
 	 * @param IStorefront[] $storefronts
 	 */
 	protected function sortStorefronts(array &$storefronts)
@@ -189,5 +231,15 @@ class Env implements IEnv
 	private function sortThemesCallable(Theme $theme)
 	{
 		return !$theme->hasStorefronts();
+	}
+
+	/**
+	 * @param $data
+	 * @return ICurrency
+	 * @throws Exception
+	 */
+	private function currencyDataToCurrency($data)
+	{
+		return Context::getInstance()->getCurrencyRegistry()->getByData($data);
 	}
 }

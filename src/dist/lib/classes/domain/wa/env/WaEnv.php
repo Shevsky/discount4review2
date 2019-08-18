@@ -2,6 +2,9 @@
 
 namespace Shevsky\Discount4Review\Domain\Wa\Env;
 
+use Exception;
+use shopConfig;
+use shopCurrencyModel;
 use SystemConfig;
 use waAppConfig;
 use waRouting;
@@ -27,7 +30,7 @@ class WaEnv
 
 	/**
 	 * @param string $app
-	 * @return SystemConfig|waAppConfig
+	 * @return SystemConfig|waAppConfig|shopConfig
 	 */
 	public function getConfig($app = 'shop')
 	{
@@ -77,5 +80,38 @@ class WaEnv
 	{
 		return !((!method_exists($this->getRouting(), 'isAlias') || !$this->getRouting()->isAlias($domain))
 			and isset($route['url']));
+	}
+
+	/**
+	 * @return mixed[]
+	 */
+	public function getCurrencyData()
+	{
+		return $this->getConfig()->getCurrency(false);
+	}
+
+	/**
+	 * @return mixed
+	 * @throws Exception
+	 */
+	public function getCurrencyCode()
+	{
+		$data = $this->getCurrencyData();
+
+		if (!array_key_exists('code', $data)) {
+			throw new Exception('Отсутствует параметр "code" для получения информации о валюте');
+		}
+
+		return $data['code'];
+	}
+
+	/**
+	 * @return mixed[]
+	 */
+	public function getCurrencies()
+	{
+		$currency_model = new shopCurrencyModel();
+
+		return $currency_model->getAll();
 	}
 }
