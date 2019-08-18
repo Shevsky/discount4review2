@@ -85,24 +85,9 @@ class WaEnv
 	/**
 	 * @return mixed[]
 	 */
-	public function getCurrencyData()
-	{
-		return $this->getConfig()->getCurrency(false);
-	}
-
-	/**
-	 * @return mixed
-	 * @throws Exception
-	 */
 	public function getCurrencyCode()
 	{
-		$data = $this->getCurrencyData();
-
-		if (!array_key_exists('code', $data)) {
-			throw new Exception('Отсутствует параметр "code" для получения информации о валюте');
-		}
-
-		return $data['code'];
+		return $this->getConfig()->getCurrency(false);
 	}
 
 	/**
