@@ -25,8 +25,20 @@ interface ITheme {
 	storefronts: IStorefront[];
 }
 
+interface ICurrency {
+	code: string;
+	sign: string;
+	sign_html: string;
+	sign_position: number;
+	sign_delim: string;
+	decimal_point: string;
+	frac_digits: number;
+	thousands_sep: string;
+}
+
 interface IGlobalParams {
 	plugin_url: string;
 	storefronts: IStorefront[];
 	themes: ITheme[];
+	currencies: ICurrency[];
 }
