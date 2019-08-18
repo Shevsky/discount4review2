@@ -3,9 +3,11 @@
 namespace Shevsky\Discount4Review\Domain\Wa;
 
 use Exception;
+use Shevsky\Discount4Review\Domain\Wa\Access\Currency;
 use Shevsky\Discount4Review\Domain\Wa\Order\Order;
 use Shevsky\Discount4Review\Domain\Wa\Order\OrderItem;
 use Shevsky\Discount4Review\Domain\Wa\Review\Review;
+use Shevsky\Discount4Review\Persistence\Access\ICurrency;
 use Shevsky\Discount4Review\Persistence\IFactory;
 use Shevsky\Discount4Review\Domain\Wa\Product\Product;
 use Shevsky\Discount4Review\Domain\Wa\Product\Sku;
@@ -87,5 +89,14 @@ class Factory implements IFactory
 	public function createOrderItem($data)
 	{
 		return new OrderItem($data);
+	}
+
+	/**
+	 * @param mixed $data
+	 * @return ICurrency
+	 */
+	public function createCurrency($data)
+	{
+		return new Currency($data);
 	}
 }
