@@ -33,7 +33,7 @@ class CurrencyRegistry
 	{
 		if (!isset($this->registry[$code]))
 		{
-			$this->registry[$code] = self::buildByCode($code);
+			$this->registry[$code] = $this->buildByCode($code);
 		}
 
 		return $this->registry[$code];
@@ -54,7 +54,7 @@ class CurrencyRegistry
 		$code = $data['code'];
 		if (!isset($this->registry[$code]))
 		{
-			$this->registry[$code] = self::buildByDirtyData($data);
+			$this->registry[$code] = $this->buildByDirtyData($data);
 		}
 
 		return $this->registry[$code];
