@@ -1,11 +1,12 @@
 import React, { Component, ReactElement } from 'react';
 import Select, { ISelectOption, ISelectProps } from 'lib/waui/Select/Select';
-import WaUISettingsHandler from 'util/WaUISettingsHandler';
+import { WaUISetttings } from 'util/WaUISettings';
 import { observer } from 'mobx-react';
 
 export interface IDomainSelectDecoratorProps extends ISelectProps {
 	name: string;
 	options: ISelectOption[];
+	arrayAccess?: WaUISetttings.IArrayAccess;
 }
 
 export interface ISelectDecoratorProps extends IDomainSelectDecoratorProps {
@@ -15,15 +16,15 @@ export interface ISelectDecoratorProps extends IDomainSelectDecoratorProps {
 @observer
 export default class SelectDecorator extends Component<ISelectDecoratorProps> {
 	render(): ReactElement<Select> {
-		const { name, model, options, ...props } = this.props;
+		const { name, model, options, arrayAccess, ...props } = this.props;
 
 		return (
 			<Select
 				{...props}
-				value={model.read(name, model.id)}
+				value={WaUISetttings.Reader(name, model, arrayAccess)}
 				options={options}
-				params={{ name, model }}
-				onChange={WaUISettingsHandler}
+				params={{ name, model, arrayAccess }}
+				onChange={WaUISetttings.Handler}
 			/>
 		);
 	}
