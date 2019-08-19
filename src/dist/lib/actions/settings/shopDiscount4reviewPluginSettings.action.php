@@ -4,6 +4,7 @@ use Shevsky\Discount4Review\Context\Context;
 use Shevsky\Discount4Review\Persistence\Access\ICurrency;
 use Shevsky\Discount4Review\Persistence\Access\IStorefront;
 use Shevsky\Discount4Review\Persistence\Access\ITheme;
+use Shevsky\Discount4Review\Persistence\Access\IUserGroup;
 use Shevsky\Discount4Review\Persistence\Settings\ISettingsItem;
 
 class shopDiscount4reviewPluginSettingsAction extends waViewAction
@@ -62,6 +63,10 @@ class shopDiscount4reviewPluginSettingsAction extends waViewAction
 			[__CLASS__, 'currencyToArray'],
 			$this->context->getEnv()->getCurrencies()
 		);
+		$params['user_groups'] = array_map(
+			[__CLASS__, 'userGroupToArray'],
+			$this->context->getEnv()->getUserGroups()
+		);
 
 		$this->view->assign('params', $params);
 	}
@@ -109,6 +114,15 @@ class shopDiscount4reviewPluginSettingsAction extends waViewAction
 		$currency_array['current'] = $this->context->getEnv()->getCurrentCurrency() === $currency;
 
 		return $currency_array;
+	}
+
+	/**
+	 * @param IUserGroup $user_group
+	 * @return mixed[]
+	 */
+	private function userGroupToArray(IUserGroup $user_group)
+	{
+		return $user_group->toArray();
 	}
 
 	/**
