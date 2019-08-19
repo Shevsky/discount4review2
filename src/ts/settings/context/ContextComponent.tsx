@@ -3,7 +3,6 @@ import Context from 'settings/context/Context';
 import ContextData from 'settings/context/ContextData';
 import BasicSettingsModel from 'settings/model/settings/domain/BasicSettingsModel';
 import StorefrontSettingsModel from 'settings/model/settings/domain/StorefrontSettingsModel';
-import { observer } from 'mobx-react';
 
 interface IContextContext extends React.Context<ContextData> {}
 
@@ -11,7 +10,6 @@ interface IContextComponentProps {
 	[key: string]: any;
 }
 
-@observer
 export default class ContextComponent<
 	P extends IContextComponentProps = any,
 	S = any
