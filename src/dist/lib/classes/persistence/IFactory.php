@@ -19,11 +19,11 @@ interface IFactory
 	public function createProduct($data);
 
 	/**
-	 * @param Product\IProduct $product
+	 * @param IProduct $product
 	 * @param mixed $data
 	 * @return ISku
 	 */
-	public function createSku(Product\IProduct $product, $data);
+	public function createSku(IProduct $product, $data);
 
 	/**
 	 * @param mixed $data
