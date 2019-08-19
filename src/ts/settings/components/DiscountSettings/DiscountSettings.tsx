@@ -6,6 +6,7 @@ import StorefrontInputText from 'lib/control/domain/StorefrontInputText/Storefro
 import StorefrontSelect from 'lib/control/domain/StorefrontSelect/StorefrontSelect';
 import { observer } from 'mobx-react';
 import { ISelectOption } from 'lib/waui/Select/Select';
+import SubHeader from 'lib/waui/SubHeader/SubHeader';
 
 @observer
 export default class DiscountSettings extends ContextComponent {
@@ -15,6 +16,8 @@ export default class DiscountSettings extends ContextComponent {
 				<Field label="Скидки включены">
 					<StorefrontCheckbox name="discount.status" />
 				</Field>
+
+				<SubHeader>Параметры скидки</SubHeader>
 
 				<Field label="Размер скидки">
 					<StorefrontInputText name="discount.value" type="float" short />{' '}
@@ -58,6 +61,33 @@ export default class DiscountSettings extends ContextComponent {
 									/>
 								</Field>
 							))}
+						</Field>
+					</>
+				)}
+
+				<SubHeader>Бонусы за фотографии к отзывам</SubHeader>
+
+				{this.params.is_review_images_allowed && (
+					<>
+						<Field
+							label="Бонус за фотографии в отзыве"
+							hint="Выдается при наличии хотя бы 1 фотографии в отзыве"
+						>
+							<StorefrontInputText name="discount.image_bonus_value" type="float" short />{' '}
+							<StorefrontSelect
+								options={this.discount_unit_options}
+								name="discount.image_bonus_unit"
+								short
+							/>
+						</Field>
+
+						<Field label="Бонус за каждую фотографию в отзыве">
+							<StorefrontInputText name="discount.image_bonus_per_1_value" type="float" short />{' '}
+							<StorefrontSelect
+								options={this.discount_unit_options}
+								name="discount.image_bonus_per_1_unit"
+								short
+							/>
 						</Field>
 					</>
 				)}
