@@ -27,6 +27,7 @@ class CurrencyRegistry
 	/**
 	 * @param string $code
 	 * @return ICurrency
+	 * @throws Exception
 	 */
 	public function getByCode($code)
 	{
