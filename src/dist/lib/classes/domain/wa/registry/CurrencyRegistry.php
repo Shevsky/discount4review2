@@ -67,9 +67,9 @@ class CurrencyRegistry
 	 */
 	private function buildByCode($code)
 	{
-		$data = waCurrency::getInfo($code);
-
-		return $this->buildByDirtyData($data);
+		return $this->buildByDirtyData([
+			'code' => $code
+		]);
 	}
 
 	/**
