@@ -10,6 +10,7 @@ export interface IInputTextProps {
 	refNode?: RefObject<any>;
 	type?: TInputTextType;
 	short?: boolean;
+	allowEmpty?: boolean;
 	[prop: string]: any;
 }
 
@@ -33,7 +34,7 @@ export default class InputText extends Component<IInputTextPropsFinal, IInputTex
 	}
 
 	render(): ReactElement<HTMLInputElement> {
-		const { className, refNode, short = false, params, ...props } = this.props;
+		const { className, refNode, short = false, allowEmpty, params, ...props } = this.props;
 		const inputClass = ClassNames(Styles.inputText, {
 			[className]: !!className,
 			[Styles.inputText_short]: short
@@ -89,7 +90,11 @@ export default class InputText extends Component<IInputTextPropsFinal, IInputTex
 	}
 
 	protected processValue(value: TInputTextValue): TInputTextValue {
-		const { type } = this.props;
+		const { type, allowEmpty = false } = this.props;
+
+		if (value === '' && allowEmpty) {
+			return value;
+		}
 
 		if (type === 'int') {
 			value = parseInt(value as string);
