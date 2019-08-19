@@ -68,6 +68,8 @@ class shopDiscount4reviewPluginSettingsAction extends waViewAction
 			$this->context->getEnv()->getUserGroups()
 		);
 
+		$params['is_review_images_allowed'] = $this->context->getSystemEnv()->isReviewImagesAllowed();
+
 		$this->view->assign('params', $params);
 	}
 
