@@ -37,9 +37,19 @@ interface ICurrency {
 	current?: boolean;
 }
 
+interface IUserGroup {
+	id: number;
+	name: string;
+	params?: {
+		system_id: string;
+		icon: string;
+	};
+}
+
 interface IGlobalParams {
 	plugin_url: string;
 	storefronts: IStorefront[];
 	themes: ITheme[];
 	currencies: ICurrency[];
+	user_groups: IUserGroup[];
 }
