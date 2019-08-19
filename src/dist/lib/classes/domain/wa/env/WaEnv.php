@@ -17,6 +17,25 @@ class WaEnv
 {
 	private $systems = [];
 
+	private static $self;
+
+	private function __construct()
+	{
+	}
+
+	/**
+	 * @return self
+	 */
+	public static function getInstance()
+	{
+		if (!isset(self::$self))
+		{
+			self::$self = new self();
+		}
+
+		return self::$self;
+	}
+
 	/**
 	 * @param string $app
 	 * @return waSystem

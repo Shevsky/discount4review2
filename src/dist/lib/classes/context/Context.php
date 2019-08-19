@@ -5,6 +5,7 @@ namespace Shevsky\Discount4Review\Context;
 use Shevsky\Discount4Review\Domain\Common\SettingsStorage\BasicSettingsStorage;
 use Shevsky\Discount4Review\Domain\Common\SettingsStorage\StorefrontSettingsStorage;
 use Shevsky\Discount4Review\Domain\Wa\Env\Env;
+use Shevsky\Discount4Review\Domain\Wa\Env\SystemEnv;
 use Shevsky\Discount4Review\Domain\Wa\Factory;
 use Shevsky\Discount4Review\Domain\Wa\Registry\CurrencyRegistry;
 use Shevsky\Discount4Review\Domain\Wa\Registry\UserGroupRegistry;
@@ -25,6 +26,7 @@ class Context
 	private $plugin;
 	private $factory;
 	private $env;
+	private $system_env;
 	private $basic_settings_storage;
 	private $storefront_settings_storage;
 	private $settings_service;
@@ -86,6 +88,19 @@ class Context
 		}
 
 		return $this->env;
+	}
+
+	/**
+	 * @return SystemEnv
+	 */
+	public function getSystemEnv()
+	{
+		if (!isset($this->system_env))
+		{
+			$this->system_env = SystemEnv::getInstance($this->plugin);
+		}
+
+		return $this->system_env;
 	}
 
 	/**

@@ -40,9 +40,8 @@ class Env implements IEnv
 	private function __construct(shopDiscount4reviewPlugin $plugin)
 	{
 		$this->plugin = $plugin;
-		$this->wa_env = new WaEnv();
+		$this->wa_env = WaEnv::getInstance();
 		$this->define_util = DefineUtil::getInstance($this);
-		self::$self = $this;
 	}
 
 	/**
