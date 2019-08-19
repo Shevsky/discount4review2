@@ -7,6 +7,7 @@ use Shevsky\Discount4Review\Domain\Common\SettingsStorage\StorefrontSettingsStor
 use Shevsky\Discount4Review\Domain\Wa\Env\Env;
 use Shevsky\Discount4Review\Domain\Wa\Factory;
 use Shevsky\Discount4Review\Domain\Wa\Registry\CurrencyRegistry;
+use Shevsky\Discount4Review\Domain\Wa\Registry\UserGroupRegistry;
 use Shevsky\Discount4Review\Domain\Wa\Util\EventUtil;
 use Shevsky\Discount4Review\Domain\Wa\Util\RoutingUtil;
 use Shevsky\Discount4Review\Service\FrontendService;
@@ -29,6 +30,7 @@ class Context
 	private $settings_service;
 	private $frontend_service;
 	private $currency_registry;
+	private $user_group_registry;
 	private $routing_util;
 	private $event_util;
 
@@ -158,6 +160,19 @@ class Context
 		}
 
 		return $this->currency_registry;
+	}
+
+	/**
+	 * @return UserGroupRegistry
+	 */
+	public function getUserGroupRegistry()
+	{
+		if (!isset($this->user_group_registry))
+		{
+			$this->user_group_registry = new UserGroupRegistry($this->getFactory());
+		}
+
+		return $this->user_group_registry;
 	}
 
 	/**
