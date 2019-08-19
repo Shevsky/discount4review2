@@ -6,6 +6,7 @@ use Shevsky\Discount4Review\Domain\Wa\Env\Env;
 use Shevsky\Discount4Review\Persistence\Access\ICurrency;
 use Shevsky\Discount4Review\Persistence\Access\IStorefront;
 use Shevsky\Discount4Review\Persistence\Access\ITheme;
+use Shevsky\Discount4Review\Persistence\Access\IUserGroup;
 use Shevsky\Discount4Review\Persistence\Env\IEnv;
 
 class DefineUtil
@@ -144,5 +145,42 @@ class DefineUtil
 		}
 
 		return current($defined_currencies);
+	}
+
+	/**
+	 * @param int[] $user_group_ids
+	 * @return IUserGroup[]
+	 */
+	public function defineUserGroups(...$user_group_ids)
+	{
+		$user_groups = $this->env->getUserGroups();
+
+		return array_values(
+			array_filter(
+				$user_groups,
+				function($user_group) use ($user_group_ids) {
+					/**
+					 * @var IUserGroup $user_group
+					 */
+
+					return in_array($user_group->getId(), $user_group_ids);
+				}
+			)
+		);
+	}
+
+	/**
+	 * @param int $user_group_id
+	 * @return IUserGroup
+	 */
+	public function defineUserGroup($user_group_id)
+	{
+		$defined_user_groups = $this->defineUserGroups($user_group_id);
+		if (empty($defined_user_groups))
+		{
+			return null;
+		}
+
+		return current($defined_user_groups);
 	}
 }
