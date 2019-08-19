@@ -4,10 +4,12 @@ namespace Shevsky\Discount4Review\Domain\Wa;
 
 use Exception;
 use Shevsky\Discount4Review\Domain\Wa\Access\Currency;
+use Shevsky\Discount4Review\Domain\Wa\Access\UserGroup;
 use Shevsky\Discount4Review\Domain\Wa\Order\Order;
 use Shevsky\Discount4Review\Domain\Wa\Order\OrderItem;
 use Shevsky\Discount4Review\Domain\Wa\Review\Review;
 use Shevsky\Discount4Review\Persistence\Access\ICurrency;
+use Shevsky\Discount4Review\Persistence\Access\IUserGroup;
 use Shevsky\Discount4Review\Persistence\IFactory;
 use Shevsky\Discount4Review\Domain\Wa\Product\Product;
 use Shevsky\Discount4Review\Domain\Wa\Product\Sku;
@@ -98,5 +100,14 @@ class Factory implements IFactory
 	public function createCurrency($data)
 	{
 		return new Currency($data);
+	}
+
+	/**
+	 * @param mixed $data
+	 * @return IUserGroup
+	 */
+	public function createUserGroup($data)
+	{
+		return new UserGroup($data);
 	}
 }

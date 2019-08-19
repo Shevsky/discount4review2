@@ -3,6 +3,7 @@
 namespace Shevsky\Discount4Review\Persistence;
 
 use Shevsky\Discount4Review\Persistence\Access\ICurrency;
+use Shevsky\Discount4Review\Persistence\Access\IUserGroup;
 use Shevsky\Discount4Review\Persistence\Order\IOrder;
 use Shevsky\Discount4Review\Persistence\Order\IOrderItem;
 use Shevsky\Discount4Review\Persistence\Product\IProduct;
@@ -47,4 +48,10 @@ interface IFactory
 	 * @return ICurrency
 	 */
 	public function createCurrency($data);
+
+	/**
+	 * @param mixed $data
+	 * @return IUserGroup
+	 */
+	public function createUserGroup($data);
 }
