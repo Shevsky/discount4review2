@@ -18,4 +18,9 @@ interface IUserGroup
 	 * @return mixed[]
 	 */
 	public function getParams();
+
+	/**
+	 * @return mixed[]
+	 */
+	public function toArray();
 }

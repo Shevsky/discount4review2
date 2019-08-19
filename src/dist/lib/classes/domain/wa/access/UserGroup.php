@@ -44,4 +44,16 @@ class UserGroup implements IUserGroup
 			'icon' => $this->data['icon']
 		];
 	}
+
+	/**
+	 * @return mixed[]
+	 */
+	public function toArray()
+	{
+		return [
+			'id' => $this->getId(),
+			'name' => $this->getName(),
+			'params' => $this->getParams()
+		];
+	}
 }
