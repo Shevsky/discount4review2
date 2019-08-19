@@ -52,4 +52,5 @@ interface IGlobalParams {
 	themes: ITheme[];
 	currencies: ICurrency[];
 	user_groups: IUserGroup[];
+	is_review_images_allowed: boolean;
 }
