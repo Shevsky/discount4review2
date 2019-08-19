@@ -9,6 +9,7 @@ use Shevsky\Discount4Review\Domain\Wa\Access\Theme;
 use Shevsky\Discount4Review\Persistence\Access\ICurrency;
 use Shevsky\Discount4Review\Persistence\Access\IStorefront;
 use Shevsky\Discount4Review\Persistence\Access\ITheme;
+use Shevsky\Discount4Review\Persistence\Access\IUserGroup;
 use Shevsky\Discount4Review\Persistence\Env\IEnv;
 use Shevsky\Discount4Review\Util\DefineUtil;
 use Shevsky\Discount4Review\WaUtil\ThemeWaUtil;
@@ -25,9 +26,11 @@ class Env implements IEnv
 	private $storefronts;
 	private $themes;
 	private $currencies;
+	private $user_groups;
 	private $current_storefront;
 	private $current_theme;
 	private $current_currency;
+	private $current_user_groups;
 
 	private static $self;
 
@@ -212,6 +215,46 @@ class Env implements IEnv
 	}
 
 	/**
+	 * @return IUserGroup[]
+	 */
+	public function getUserGroups()
+	{
+		if (!isset($this->user_groups))
+		{
+			$user_groups = $this->wa_env->getContactCategoryArray();
+
+			$this->user_groups = array_values(
+				array_map(
+					[__CLASS__, 'userGroupDataToUserGroup'],
+					$user_groups
+				)
+			);
+		}
+
+		return $this->user_groups;
+	}
+
+	/**
+	 * @return IUserGroup[]
+	 */
+	public function getCurrentUserGroups()
+	{
+		if (!isset($this->current_user_groups))
+		{
+			$current_user_group_ids = $this->wa_env->getContactCategoriesIds();
+
+			/**
+			 * @var IUserGroup[] $current_user_groups
+			 */
+			$current_user_groups = $this->define_util->defineUserGroups(...$current_user_group_ids);
+
+			$this->current_user_groups = $current_user_groups;
+		}
+
+		return $this->current_user_groups;
+	}
+
+	/**
 	 * @param IStorefront[] $storefronts
 	 */
 	protected function sortStorefronts(array &$storefronts)
@@ -240,12 +283,22 @@ class Env implements IEnv
 	}
 
 	/**
-	 * @param $data
+	 * @param mixed[] $data
 	 * @return ICurrency
 	 * @throws Exception
 	 */
 	private function currencyDataToCurrency($data)
 	{
 		return Context::getInstance()->getCurrencyRegistry()->getByData($data);
+	}
+
+	/**
+	 * @param mixed[] $data
+	 * @return IUserGroup
+	 * @throws Exception
+	 */
+	private function userGroupDataToUserGroup($data)
+	{
+		return Context::getInstance()->getUserGroupRegistry()->getByData($data);
 	}
 }
