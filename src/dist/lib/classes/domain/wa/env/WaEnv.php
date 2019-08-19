@@ -7,6 +7,9 @@ use shopConfig;
 use shopCurrencyModel;
 use SystemConfig;
 use waAppConfig;
+use waContactCategoriesModel;
+use waContactCategoryModel;
+use waException;
 use waRouting;
 use waSystem;
 
@@ -98,5 +101,43 @@ class WaEnv
 		$currency_model = new shopCurrencyModel();
 
 		return $currency_model->getAll();
+	}
+
+	/**
+	 * @return mixed[]
+	 */
+	public function getContactCategoryArray()
+	{
+		$contact_category_model = new waContactCategoryModel();
+
+		return $contact_category_model->getAll();
+	}
+
+	/**
+	 * @return int[]
+	 */
+	public function getContactCategoriesIds()
+	{
+		$contact_categories_model = new waContactCategoriesModel();
+
+		try
+		{
+			$contact_categories = $contact_categories_model->getByField(
+				'contact_id',
+				wa()->getUser()->getId(),
+				'category_id'
+			);
+		}
+		catch (waException $e)
+		{
+			return [];
+		}
+
+		if (!is_array($contact_categories))
+		{
+			return [];
+		}
+
+		return array_keys($contact_categories);
 	}
 }
