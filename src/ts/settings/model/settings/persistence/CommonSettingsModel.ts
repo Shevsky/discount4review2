@@ -1,5 +1,6 @@
 import './ISettingsModel';
 import { observable } from 'util/mobx';
+import VarClone from 'util/VarClone';
 
 export default class CommonSettingsModel implements ISettingsModel {
 	@observable
@@ -7,6 +8,8 @@ export default class CommonSettingsModel implements ISettingsModel {
 
 	@observable
 	data: ISettings = {};
+
+	protected subscribes: TSettingsModelSubscribeHandler[] = [];
 
 	constructor(settings: ISettings) {
 		this.data = settings;
@@ -34,6 +37,17 @@ export default class CommonSettingsModel implements ISettingsModel {
 			return;
 		}
 
+		const prevValue = VarClone(this.read(name, id));
+		this.dispatch(name, id, prevValue);
+
 		this.data[name][id] = value;
+	}
+
+	subscribe(handler: TSettingsModelSubscribeHandler): void {
+		this.subscribes.push(handler);
+	}
+
+	protected dispatch(name: string, id: string, prevValue: any): void {
+		this.subscribes.forEach(handler => handler(name, id, prevValue));
 	}
 }
