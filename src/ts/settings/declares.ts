@@ -48,6 +48,7 @@ interface IUserGroup {
 
 interface IGlobalParams {
 	plugin_url: string;
+	save_settings_url: string;
 	storefronts: IStorefront[];
 	themes: ITheme[];
 	currencies: ICurrency[];

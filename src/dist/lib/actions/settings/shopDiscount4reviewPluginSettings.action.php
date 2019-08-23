@@ -50,7 +50,9 @@ class shopDiscount4reviewPluginSettingsAction extends waViewAction
 	{
 		$params = [];
 
+		$plugin_id = shopDiscount4reviewPlugin::PLUGIN_ID;
 		$params['plugin_url'] = Context::getPluginUrl();
+		$params['save_settings_url'] = "?plugin={$plugin_id}&module=settings&action=save";
 		$params['storefronts'] = array_map(
 			[__CLASS__, 'storefrontToArray'],
 			$this->context->getEnv()->getStorefronts()
