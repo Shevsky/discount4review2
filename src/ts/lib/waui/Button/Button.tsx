@@ -24,7 +24,7 @@ const Button = ({
 		type = Styles['button_delete'];
 	}
 
-	const linkClass = ClassNames('button', {
+	const linkClass = ClassNames('button', Styles.button, {
 		[className]: !!className,
 		[type]: !!type
 	});
