@@ -30,6 +30,12 @@ interface ISettingsStorage
 	public function hasSetting($name);
 
 	/**
+	 * @param string $name
+	 * @return ISettingsConfigItem
+	 */
+	public function getSettingConfig($name);
+
+	/**
 	 * @return array[] = [
 	 *  $name => [
 	 *      '*' => mixed,

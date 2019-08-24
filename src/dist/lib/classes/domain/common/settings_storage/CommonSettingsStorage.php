@@ -6,6 +6,7 @@ use Shevsky\Discount4Review\Context\Context;
 use Shevsky\Discount4Review\Domain\Common\SettingsConfig\SettingsConfig;
 use Shevsky\Discount4Review\Domain\Common\SettingsItem\SettingsItem;
 use Shevsky\Discount4Review\Persistence\Access\ISettingsAccess;
+use Shevsky\Discount4Review\Persistence\Settings\ISettingsConfigItem;
 use Shevsky\Discount4Review\Persistence\Settings\ISettingsItem;
 use Shevsky\Discount4Review\Persistence\Settings\ISettingsStorage;
 use Shevsky\Discount4Review\Service\SettingsService;
@@ -74,6 +75,15 @@ abstract class CommonSettingsStorage implements ISettingsStorage
 	}
 
 	/**
+	 * @param string $name
+	 * @return ISettingsConfigItem
+	 */
+	public function getSettingConfig($name)
+	{
+		return $this->settings_config->getSetting($name);
+	}
+
+	/**
 	 * @return ISettingsItem[] = [
 	 *  $name => ISettingsItem
 	 * ]
@@ -97,14 +107,14 @@ abstract class CommonSettingsStorage implements ISettingsStorage
 	 */
 	public function getSetting($name)
 	{
-		if (!$this->settings_config->hasSetting($name))
+		if (!$this->hasSetting($name))
 		{
 			throw new Exception("Не найдена настройка \"{$name}\"");
 		}
 
 		if (!array_key_exists($name, $this->setting_items))
 		{
-			$setting_config = $this->settings_config->getSetting($name);
+			$setting_config = $this->getSettingConfig($name);
 
 			$values = $this->access->readSetting($name);
 			if (!is_array($values))
