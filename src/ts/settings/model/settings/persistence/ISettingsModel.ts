@@ -5,6 +5,8 @@ interface ISettingsModel {
 
 	data: ISettings;
 
+	is_freezed: boolean;
+
 	has(name: string): boolean;
 
 	read(name: string, id: string): any;
@@ -12,4 +14,10 @@ interface ISettingsModel {
 	write(name: string, id: string, value: any): void;
 
 	subscribe(handler: TSettingsModelSubscribeHandler): void;
+
+	freeze(): void;
+
+	unfreeze(): void;
+
+	toJS(): ISettings;
 }
