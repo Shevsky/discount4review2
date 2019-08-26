@@ -134,6 +134,8 @@ export default class InputText extends Component<IInputTextPropsFinal, IInputTex
 		let value = e.target.value as TInputTextValue;
 		value = this.processValue(value);
 
+		this.value = value;
+
 		this.triggerChange(value);
 	};
 }
