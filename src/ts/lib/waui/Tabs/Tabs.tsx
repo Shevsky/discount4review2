@@ -46,7 +46,7 @@ export default class Tabs extends Component<ITabsProps, ITabsState> {
 
 						const props = {};
 						if (!is_link) {
-							props['href'] = 'javascript: void(0);';
+							props['href'] = null;
 							props['data-index'] = idx;
 							props['onClick'] = this.handleClickTab;
 						} else {
