@@ -5,21 +5,21 @@ import ClassNames from 'classnames';
 import BottomFixedBar from 'lib/waui/BottomFixedBar/BottomFixedBar';
 import Button from 'lib/waui/Button/Button';
 import WaRequest from 'util/WaRequest';
+import { observer } from 'mobx-react';
 
 type TSettingsSaverStatus = 'general' | 'loading' | 'success' | 'error';
 
 interface ISettingsSaverState {
-	has_modifies: boolean;
 	status: TSettingsSaverStatus;
 	message: string;
 }
 
+@observer
 export default class SettingsSaver extends ContextComponent<{}, ISettingsSaverState> {
 	constructor(props) {
 		super(props);
 
 		this.state = {
-			has_modifies: false,
 			status: 'general',
 			message: ''
 		};
@@ -46,16 +46,8 @@ export default class SettingsSaver extends ContextComponent<{}, ISettingsSaverSt
 		);
 	}
 
-	componentDidMount(): void {
-		this.bindEvents();
-	}
-
 	get has_modifies(): boolean {
-		return this.state.has_modifies;
-	}
-
-	set has_modifies(has_modifies: boolean) {
-		this.setState({ has_modifies });
+		return this.settings_models.some(settings_model => settings_model.hasAnyModifies());
 	}
 
 	get status(): TSettingsSaverStatus {
@@ -87,12 +79,6 @@ export default class SettingsSaver extends ContextComponent<{}, ISettingsSaverSt
 		return Object.values(this.settings_models_identified);
 	}
 
-	private bindEvents() {
-		this.settings_models.forEach(settings_model =>
-			settings_model.subscribe(this.handleSettingsChanged)
-		);
-	}
-
 	private freezeSettingsModels() {
 		this.settings_models.forEach(settings_model => settings_model.freeze());
 	}
@@ -100,10 +86,6 @@ export default class SettingsSaver extends ContextComponent<{}, ISettingsSaverSt
 	private unfreezeSettingsModels() {
 		this.settings_models.forEach(settings_model => settings_model.unfreeze());
 	}
-
-	private handleSettingsChanged = (name: string, id: string, prevValue: any) => {
-		this.has_modifies = true;
-	};
 
 	private handleClickSave = (e: MouseEvent<HTMLElement>): boolean => {
 		if (!this.has_modifies) {
