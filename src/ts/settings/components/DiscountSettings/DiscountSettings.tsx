@@ -14,9 +14,7 @@ export default class DiscountSettings extends ContextComponent {
 	render(): ReactNode {
 		return (
 			<div>
-				<Field label="Витрина">
-					<SettingsModelIdSelect model={this.storefront_settings} />
-				</Field>
+				<SettingsModelIdSelect model={this.storefront_settings} />
 
 				<Field label="Скидки включены">
 					<StorefrontCheckbox name="discount.status" />
