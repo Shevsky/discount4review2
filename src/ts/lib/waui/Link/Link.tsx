@@ -13,12 +13,12 @@ const Link = ({
 	onClick?: (e: MouseEvent<HTMLElement>) => boolean;
 }) => {
 	const { className = '' } = props;
-	const linkClassname = ClassNames(Styles.link, {
+	const linkClass = ClassNames(Styles.link, {
 		[className]: !!className
 	});
 
 	return (
-		<a href={href || null} {...props} className={linkClassname}>
+		<a href={href || null} {...props} className={linkClass}>
 			{children}
 		</a>
 	);
