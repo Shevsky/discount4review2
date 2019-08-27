@@ -53,6 +53,12 @@ export default class InputText extends Component<IInputTextPropsFinal, IInputTex
 		);
 	}
 
+	UNSAFE_componentWillReceiveProps(nextProps: Readonly<IInputTextPropsFinal>) {
+		if (nextProps.value !== this.value) {
+			this.value = nextProps.value;
+		}
+	}
+
 	get value(): TInputTextValue {
 		return this.state.value;
 	}
