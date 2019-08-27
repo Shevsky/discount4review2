@@ -81,11 +81,22 @@ export default class CommonSettingsModel implements ISettingsModel {
 	@action
 	resetModifies(id: string): void {
 		this.modified_flags = this.modified_flags.filter(_id => _id !== id);
+		this.resetValues(id);
 	}
 
 	@action
 	resetAllModifies(): void {
+		this.modified_flags.forEach(id => {
+			this.resetValues(id);
+		});
 		this.modified_flags = [];
+	}
+
+	protected resetValues(id: string) {
+		Object.keys(this.data).forEach(name => {
+			this.dispatch(name, id, null);
+			delete this.data[name][id];
+		});
 	}
 
 	protected setModified(id: string) {
