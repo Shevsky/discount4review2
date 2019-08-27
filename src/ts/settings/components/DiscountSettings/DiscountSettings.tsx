@@ -5,14 +5,19 @@ import StorefrontCheckbox from 'lib/control/domain/StorefrontCheckbox/Storefront
 import StorefrontInputText from 'lib/control/domain/StorefrontInputText/StorefrontInputText';
 import StorefrontSelect from 'lib/control/domain/StorefrontSelect/StorefrontSelect';
 import { observer } from 'mobx-react';
-import { ISelectOption } from 'lib/waui/Select/Select';
+import Select, { ISelectOption } from 'lib/waui/Select/Select';
 import SubHeader from 'lib/waui/SubHeader/SubHeader';
+import SettingsModelIdSelect from 'settings/components/SettingsModelIdSelect/SettingsModelIdSelect';
 
 @observer
 export default class DiscountSettings extends ContextComponent {
 	render(): ReactNode {
 		return (
 			<div>
+				<Field label="Витрина">
+					<SettingsModelIdSelect model={this.storefront_settings} />
+				</Field>
+
 				<Field label="Скидки включены">
 					<StorefrontCheckbox name="discount.status" />
 				</Field>
