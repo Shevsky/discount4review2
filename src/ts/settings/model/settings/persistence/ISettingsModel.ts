@@ -20,4 +20,12 @@ interface ISettingsModel {
 	unfreeze(): void;
 
 	toJS(): ISettings;
+
+	hasModifies(id: string): boolean;
+
+	hasAnyModifies(): boolean;
+
+	resetModifies(id: string): void;
+
+	resetAllModifies(): void;
 }

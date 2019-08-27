@@ -1,5 +1,5 @@
 import './ISettingsModel';
-import { observable, toJS } from 'util/mobx';
+import { action, observable, toJS } from 'util/mobx';
 import VarClone from 'util/VarClone';
 
 export default class CommonSettingsModel implements ISettingsModel {
@@ -12,6 +12,9 @@ export default class CommonSettingsModel implements ISettingsModel {
 	protected subscribes: TSettingsModelSubscribeHandler[] = [];
 
 	is_freezed: boolean = false;
+
+	@observable
+	modified_flags: string[] = [];
 
 	constructor(settings: ISettings) {
 		this.data = settings;
@@ -45,6 +48,7 @@ export default class CommonSettingsModel implements ISettingsModel {
 
 		const prevValue = VarClone(this.read(name, id));
 		this.dispatch(name, id, prevValue);
+		this.setModified(id);
 
 		this.data[name][id] = value;
 	}
@@ -63,6 +67,31 @@ export default class CommonSettingsModel implements ISettingsModel {
 
 	toJS(): ISettings {
 		return toJS(this.data);
+	}
+
+	hasModifies(id: string): boolean {
+		console.log(this.modified_flags);
+		return this.modified_flags.includes(id);
+	}
+
+	hasAnyModifies(): boolean {
+		return this.modified_flags.length > 0;
+	}
+
+	@action
+	resetModifies(id: string): void {
+		this.modified_flags = this.modified_flags.filter(_id => _id !== id);
+	}
+
+	@action
+	resetAllModifies(): void {
+		this.modified_flags = [];
+	}
+
+	protected setModified(id: string) {
+		if (!this.modified_flags.includes(id)) {
+			this.modified_flags.push(id);
+		}
 	}
 
 	protected dispatch(name: string, id: string, prevValue: any): void {
