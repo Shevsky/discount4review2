@@ -20,6 +20,30 @@ export default class DiscountSettings extends ContextComponent {
 					<StorefrontCheckbox name="discount.status" />
 				</Field>
 
+				<SubHeader>Купоны</SubHeader>
+
+				{this.coupon_type_options.length > 1 && (
+					<Field label="Тип купонов">
+						<StorefrontSelect
+							options={this.coupon_type_options}
+							name="discount.coupon_type"
+							short
+						/>
+					</Field>
+				)}
+
+				<Field label="Количество символов в купоне">
+					<StorefrontInputText name="discount.coupon_length" type="int" short />
+				</Field>
+
+				<Field label="Префикс купона">
+					<StorefrontInputText
+						name="discount.coupon_prefix"
+						allowedSymbols="a-z0-9_\-"
+						allowEmpty
+					/>
+				</Field>
+
 				<SubHeader>Параметры скидки</SubHeader>
 
 				<Field label="Размер скидки">
@@ -121,5 +145,23 @@ export default class DiscountSettings extends ContextComponent {
 				label: this.current_currency.sign
 			}
 		];
+	}
+
+	get coupon_type_options(): ISelectOption[] {
+		const coupon_type_options = [
+			{
+				value: 'default',
+				label: 'Купоны магазина'
+			}
+		];
+
+		if (this.params.integration_availability.flexdiscount) {
+			coupon_type_options.push({
+				value: 'flexdiscount',
+				label: 'Купоны плагина "Гибкие скидки"'
+			});
+		}
+
+		return coupon_type_options;
 	}
 }
