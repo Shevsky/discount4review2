@@ -2,6 +2,9 @@
 
 return [
 	'discount.status' => true,
+	'discount.coupon_type' => 'default',
+	'discount.coupon_length' => '16',
+	'discount.coupon_prefix' => 'DSC4RVW',
 	'discount.value' => 0,
 	'discount.unit' => '%',
 	'discount.individual_status' => false,

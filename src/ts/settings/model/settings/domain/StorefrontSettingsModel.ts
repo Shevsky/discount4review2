@@ -2,6 +2,9 @@ import CommonSettingsModel from 'settings/model/settings/persistence/CommonSetti
 
 export default class StorefrontSettingsModel extends CommonSettingsModel {
 	'discount.status': boolean;
+	'discount.coupon_type': boolean;
+	'discount.coupon_length': number;
+	'discount.coupon_prefix': string;
 	'discount.value': number;
 	'discount.unit': string;
 	'discount.individual_status': boolean;
