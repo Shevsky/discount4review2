@@ -1,4 +1,5 @@
 import VarClone from 'util/VarClone';
+import IsEqual from 'util/IsEqual';
 
 export namespace WaUISetttings {
 	export interface IParams {
@@ -51,7 +52,7 @@ export namespace WaUISetttings {
 
 			const { index, defaultValue } = arrayAccess;
 
-			if (JSON.stringify(value) !== JSON.stringify(defaultValue)) {
+			if (!IsEqual(value, defaultValue)) {
 				value = {
 					...current_value,
 					[index]: value
