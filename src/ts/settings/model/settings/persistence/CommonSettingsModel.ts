@@ -1,6 +1,7 @@
 import './ISettingsModel';
 import { action, observable, toJS } from 'util/mobx';
 import VarClone from 'util/VarClone';
+import IsEqual from 'util/IsEqual';
 
 export default class CommonSettingsModel implements ISettingsModel {
 	@observable
@@ -47,8 +48,10 @@ export default class CommonSettingsModel implements ISettingsModel {
 		}
 
 		const prevValue = VarClone(this.read(name, id));
-		this.dispatch(name, id, prevValue);
-		this.setModified(id);
+		if (!IsEqual(prevValue, value)) {
+			this.dispatch(name, id, prevValue);
+			this.setModified(id);
+		}
 
 		this.data[name][id] = value;
 	}
