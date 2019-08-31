@@ -24,6 +24,10 @@ const Button = ({
 		type = Styles['button_delete'];
 	}
 
+	if (type === 'loading') {
+		type = Styles['button_loading'];
+	}
+
 	const linkClass = ClassNames('button', Styles.button, {
 		[className]: !!className,
 		[type]: !!type
