@@ -34,12 +34,18 @@ class SettingsSaveService
 			return;
 		}
 
+		$this->resetSettings();
 		foreach ($this->settings as $name => $values)
 		{
 			$this->saveSetting($name, $values);
 		}
 
 		$this->is_saved = true;
+	}
+
+	private function resetSettings()
+	{
+		$this->settings_storage->getAccess()->resetSettings();
 	}
 
 	/**
