@@ -54,7 +54,7 @@ export namespace WaUISetttings {
 				[index]: value
 			};
 		}
-		console.log(`Setting ${name}`, value);
+
 		model.write(name, model.id, value);
 	};
 }

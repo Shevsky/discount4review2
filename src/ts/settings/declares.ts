@@ -1,8 +1,8 @@
 type TSettingsItemValue<T = any> = T;
 
-type ISettings = {
+interface ISettings {
 	[name: string]: ISettingsItem;
-};
+}
 
 interface ISettingsItem<T = any> {
 	'*': TSettingsItemValue<T>;

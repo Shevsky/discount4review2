@@ -70,7 +70,6 @@ export default class CommonSettingsModel implements ISettingsModel {
 	}
 
 	hasModifies(id: string): boolean {
-		console.log(this.modified_flags);
 		return this.modified_flags.includes(id);
 	}
 

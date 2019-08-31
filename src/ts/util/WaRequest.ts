@@ -2,14 +2,14 @@ import Cookies from 'js-cookie';
 
 type TWaRequestStatus = 'ok' | 'fail';
 
-type TWaRequestError = string | string[] | Array<string[]>;
+type TWaRequestError = string | string[] | string[][];
 
 type TWaRequestMethod = 'GET' | 'POST';
 
-type TWaRequestData = {
+interface IWaRequestData {
 	[name: string]: any;
 	_csrf?: string;
-};
+}
 
 type TWaRequestPromise<D = any> = Promise<D>;
 
@@ -81,13 +81,13 @@ export default new class WaRequest {
 		return {
 			type,
 			message: typeof message === 'string' ? message : '',
-			response: response
+			response
 		};
 	}
 
-	private static fillForm(form: FormData, data: TWaRequestData, parent?: string) {
+	private static fillForm(form: FormData, data: IWaRequestData, parent?: string) {
 		if (data && typeof data === 'object' && !(data instanceof Date) && !(data instanceof File)) {
-			for (let name in data) {
+			for (const name in data) {
 				WaRequest.fillForm(form, data[name], parent ? parent + '[' + name + ']' : name);
 			}
 		} else {
@@ -97,7 +97,7 @@ export default new class WaRequest {
 		}
 	}
 
-	private static buildForm(data: TWaRequestData): FormData {
+	private static buildForm(data: IWaRequestData): FormData {
 		const form = new FormData();
 
 		WaRequest.fillForm(form, data);
@@ -105,22 +105,22 @@ export default new class WaRequest {
 		return form;
 	}
 
-	get<D = any>(url: string, data: TWaRequestData): TWaRequestPromise<D> {
+	get<D = any>(url: string, data: IWaRequestData): TWaRequestPromise<D> {
 		return this.request('GET', url, data);
 	}
 
-	post<D = any>(url: string, data: TWaRequestData): TWaRequestPromise<D> {
+	post<D = any>(url: string, data: IWaRequestData): TWaRequestPromise<D> {
 		return this.request('POST', url, data);
 	}
 
-	protected workup(data: TWaRequestData) {
+	protected workup(data: IWaRequestData) {
 		data._csrf = Cookies.get('_csrf');
 	}
 
 	protected request<D = any>(
 		method: TWaRequestMethod,
 		url: string,
-		data: TWaRequestData
+		data: IWaRequestData
 	): TWaRequestPromise<D> {
 		const xhr = new XMLHttpRequest();
 		xhr.open(method, url, true);

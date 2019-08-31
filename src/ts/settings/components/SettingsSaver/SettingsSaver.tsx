@@ -89,7 +89,7 @@ export default class SettingsSaver extends ContextComponent<{}, ISettingsSaverSt
 
 	private handleClickSave = (e: MouseEvent<HTMLElement>): boolean => {
 		if (!this.has_modifies) {
-			//return false;
+			return false;
 		}
 
 		this.handleBeforeSave();
