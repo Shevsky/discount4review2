@@ -75,6 +75,14 @@ class SettingsItem implements ISettingsItem
 	}
 
 	/**
+	 * @return string
+	 */
+	public function getType()
+	{
+		return $this->type;
+	}
+
+	/**
 	 * @return mixed[] = [
 	 *  '*' => mixed,
 	 *  $id => mixed

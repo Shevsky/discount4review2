@@ -32,6 +32,11 @@ interface ISettingsItem
 	public function getIterator();
 
 	/**
+	 * @return string
+	 */
+	public function getType();
+
+	/**
 	 * @return mixed[] = [
 	 *  '*' => mixed,
 	 *  $id => mixed
