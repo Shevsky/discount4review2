@@ -2,6 +2,9 @@
 
 namespace Shevsky\Discount4Review\Util;
 
+use Exception;
+use stdClass;
+
 class SettingTransformerUtil
 {
 	/**
@@ -18,6 +21,10 @@ class SettingTransformerUtil
 		elseif ($type === 'array')
 		{
 			return self::transformArray($value);
+		}
+		elseif ($type === 'object')
+		{
+			return self::transformObject($value);
 		}
 		elseif ($type === 'boolean')
 		{
@@ -52,16 +59,54 @@ class SettingTransformerUtil
 		}
 		elseif (is_string($value))
 		{
-			$value_json_decoded = json_decode($value, true);
-			if ($value_json_decoded === null || json_last_error() !== JSON_ERROR_NONE)
+			try
+			{
+				$value = JsonUtil::decode($value);
+				if (!is_array($value) || CommonUtil::isAssocArray($value))
+				{
+					$value = [];
+				}
+			}
+			catch (Exception $e)
 			{
 				return [];
 			}
 
-			return $value_json_decoded;
+			return $value;
 		}
 
 		return [];
+	}
+
+	private static function transformObject($value)
+	{
+		if (is_object($value))
+		{
+			return $value;
+		}
+		elseif (is_string($value))
+		{
+			try
+			{
+				$value = JsonUtil::decode($value);
+
+				if (!is_object($value) && is_array($value)
+					&& CommonUtil::isNumericArray(
+						$value
+					))
+				{
+					$value = (object)$value;
+				}
+			}
+			catch (Exception $e)
+			{
+				return new stdClass();
+			}
+
+			return $value;
+		}
+
+		return new stdClass();
 	}
 
 	/**

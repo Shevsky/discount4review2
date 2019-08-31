@@ -19,6 +19,10 @@ class SettingRetransformerUtil
 		{
 			return self::retransformArray($value);
 		}
+		elseif ($type === 'object')
+		{
+			return self::retransformObject($value);
+		}
 		elseif ($type === 'boolean')
 		{
 			return self::retransformBool($value);
@@ -52,6 +56,20 @@ class SettingRetransformerUtil
 		}
 
 		return '[]';
+	}
+
+	/**
+	 * @param mixed $value
+	 * @return string
+	 */
+	private static function retransformObject($value)
+	{
+		if (is_array($value))
+		{
+			return json_encode($value);
+		}
+
+		return '{}';
 	}
 
 	/**
