@@ -25,10 +25,6 @@ class shopDiscount4reviewPluginSettingsSaveController extends waJsonController
 
 		$this->saveSettings($basic_settings_storage, $basic_settings);
 		$this->saveSettings($storefront_settings_storage, $storefront_settings);
-
-		$this->response = [
-			'test' => 123
-		];
 	}
 
 	/**
