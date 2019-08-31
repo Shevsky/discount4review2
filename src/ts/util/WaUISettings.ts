@@ -1,3 +1,5 @@
+import VarClone from 'util/VarClone';
+
 export namespace WaUISetttings {
 	export interface IParams {
 		name: string;
@@ -19,7 +21,7 @@ export namespace WaUISetttings {
 			value = {};
 		}
 
-		return value;
+		return { ...value };
 	};
 
 	export const Reader = (name: string, model: ISettingsModel, arrayAccess?: IArrayAccess) => {
@@ -47,12 +49,20 @@ export namespace WaUISetttings {
 			let current_value = model.read(name, model.id);
 			current_value = ArrayAccessPrepare(name, current_value);
 
-			const { index } = arrayAccess;
+			const { index, defaultValue } = arrayAccess;
 
-			value = {
-				...current_value,
-				[index]: value
-			};
+			if (JSON.stringify(value) !== JSON.stringify(defaultValue)) {
+				value = {
+					...current_value,
+					[index]: value
+				};
+			} else {
+				value = VarClone(current_value);
+
+				if (value.hasOwnProperty(index)) {
+					delete value[index];
+				}
+			}
 		}
 
 		model.write(name, model.id, value);
