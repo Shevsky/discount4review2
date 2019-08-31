@@ -7,6 +7,7 @@ use Shevsky\Discount4Review\Domain\Common\SettingsStorage\StorefrontSettingsStor
 use Shevsky\Discount4Review\Domain\Wa\Env\Env;
 use Shevsky\Discount4Review\Domain\Wa\Env\SystemEnv;
 use Shevsky\Discount4Review\Domain\Wa\Factory;
+use Shevsky\Discount4Review\Domain\Wa\IntegrationDomain\IntegrationPool;
 use Shevsky\Discount4Review\Domain\Wa\Registry\CurrencyRegistry;
 use Shevsky\Discount4Review\Domain\Wa\Registry\UserGroupRegistry;
 use Shevsky\Discount4Review\Domain\Wa\Util\EventUtil;
@@ -31,6 +32,7 @@ class Context
 	private $storefront_settings_storage;
 	private $settings_service;
 	private $frontend_service;
+	private $integration_pool;
 	private $currency_registry;
 	private $user_group_registry;
 	private $routing_util;
@@ -162,6 +164,19 @@ class Context
 		}
 
 		return $this->frontend_service;
+	}
+
+	/**
+	 * @return IntegrationPool
+	 */
+	public function getIntegrationPool()
+	{
+		if (!isset($this->integration_pool))
+		{
+			$this->integration_pool = new IntegrationPool();
+		}
+
+		return $this->integration_pool;
 	}
 
 	/**
