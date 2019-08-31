@@ -11,6 +11,7 @@ export interface IInputTextProps {
 	type?: TInputTextType;
 	short?: boolean;
 	allowEmpty?: boolean;
+	allowedSymbols?: string;
 	[prop: string]: any;
 }
 
@@ -34,7 +35,15 @@ export default class InputText extends Component<IInputTextPropsFinal, IInputTex
 	}
 
 	render(): ReactElement<HTMLInputElement> {
-		const { className, refNode, short = false, allowEmpty, params, ...props } = this.props;
+		const {
+			className,
+			refNode,
+			short = false,
+			allowEmpty,
+			allowedSymbols,
+			params,
+			...props
+		} = this.props;
 		const inputClass = ClassNames(Styles.inputText, {
 			[className]: !!className,
 			[Styles.inputText_short]: short
@@ -70,17 +79,19 @@ export default class InputText extends Component<IInputTextPropsFinal, IInputTex
 	get type(): string {
 		const { type } = this.props;
 
-		if (type === 'password') {
+		if (['password'].includes(type)) {
 			return type;
+		} else if (type === 'int') {
+			return 'number';
 		} else {
 			return 'text';
 		}
 	}
 
 	get is_deferred_handler(): boolean {
-		const { type } = this.props;
+		const { type, allowedSymbols = '' } = this.props;
 
-		return ['int', 'float'].includes(type);
+		return ['float'].includes(type) || allowedSymbols.length > 0;
 	}
 
 	protected triggerChange(value: TInputTextValue) {
@@ -90,7 +101,7 @@ export default class InputText extends Component<IInputTextPropsFinal, IInputTex
 	}
 
 	protected processValue(value: TInputTextValue): TInputTextValue {
-		const { type, allowEmpty = false } = this.props;
+		const { type, allowedSymbols = '', allowEmpty = false } = this.props;
 
 		if (value === '' && allowEmpty) {
 			return value;
@@ -107,6 +118,8 @@ export default class InputText extends Component<IInputTextPropsFinal, IInputTex
 			if (isNaN(value)) {
 				value = 0;
 			}
+		} else if (allowedSymbols.length > 0) {
+			value = (value as string).replace(new RegExp('[^' + allowedSymbols + ']', 'ig'), '');
 		}
 
 		return value;
