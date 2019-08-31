@@ -25,4 +25,6 @@ interface ISettingsAccess
 	 * @param string[] $ids
 	 */
 	public function deleteSetting($name, array $ids = []);
+
+	public function resetSettings();
 }

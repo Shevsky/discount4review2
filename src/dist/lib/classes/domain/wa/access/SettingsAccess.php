@@ -102,4 +102,9 @@ abstract class SettingsAccess extends waModel implements ISettingsAccess
 
 		$this->deleteByField($data);
 	}
+
+	public function resetSettings()
+	{
+		$this->truncate();
+	}
 }
