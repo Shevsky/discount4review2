@@ -1,5 +1,5 @@
 import './ISettingsModel';
-import { action, observable, toJS } from 'util/mobx';
+import { action, computed, observable, toJS } from 'util/mobx';
 import VarClone from 'util/VarClone';
 import IsEqual from 'util/IsEqual';
 
@@ -38,6 +38,7 @@ export default class CommonSettingsModel implements ISettingsModel {
 		return item['*'];
 	}
 
+	@action
 	write(name: string, id: string, value: any): void {
 		if (!this.has(name)) {
 			return;
@@ -81,8 +82,18 @@ export default class CommonSettingsModel implements ISettingsModel {
 	}
 
 	@action
-	resetModifies(id: string): void {
+	resetModifiedFlags(id: string): void {
 		this.modified_flags = this.modified_flags.filter(_id => _id !== id);
+	}
+
+	@action
+	resetAllModifiedFlags(): void {
+		this.modified_flags = [];
+	}
+
+	@action
+	resetModifies(id: string): void {
+		this.resetModifiedFlags(id);
 		this.resetValues(id);
 	}
 
@@ -91,7 +102,7 @@ export default class CommonSettingsModel implements ISettingsModel {
 		this.modified_flags.forEach(id => {
 			this.resetValues(id);
 		});
-		this.modified_flags = [];
+		this.resetAllModifiedFlags();
 	}
 
 	protected resetValues(id: string) {

@@ -25,6 +25,10 @@ interface ISettingsModel {
 
 	hasAnyModifies(): boolean;
 
+	resetModifiedFlags(id: string): void;
+
+	resetAllModifiedFlags(): void;
+
 	resetModifies(id: string): void;
 
 	resetAllModifies(): void;
