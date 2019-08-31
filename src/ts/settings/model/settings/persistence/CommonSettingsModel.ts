@@ -81,6 +81,12 @@ export default class CommonSettingsModel implements ISettingsModel {
 		return this.modified_flags.length > 0;
 	}
 
+	hasDifferences(from_id: string, to_id: string): boolean {
+		return Object.keys(this.data).some(
+			name => !IsEqual(this.read(name, from_id), this.read(name, to_id))
+		);
+	}
+
 	@action
 	resetModifiedFlags(id: string): void {
 		this.modified_flags = this.modified_flags.filter(_id => _id !== id);
@@ -93,7 +99,6 @@ export default class CommonSettingsModel implements ISettingsModel {
 
 	@action
 	resetModifies(id: string): void {
-		this.resetModifiedFlags(id);
 		this.resetValues(id);
 	}
 
@@ -102,12 +107,12 @@ export default class CommonSettingsModel implements ISettingsModel {
 		this.modified_flags.forEach(id => {
 			this.resetValues(id);
 		});
-		this.resetAllModifiedFlags();
 	}
 
 	protected resetValues(id: string) {
 		Object.keys(this.data).forEach(name => {
 			this.dispatch(name, id, null);
+			this.setModified(id);
 			delete this.data[name][id];
 		});
 	}

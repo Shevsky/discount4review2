@@ -25,6 +25,8 @@ interface ISettingsModel {
 
 	hasAnyModifies(): boolean;
 
+	hasDifferences(from_id: string, to_id: string): boolean;
+
 	resetModifiedFlags(id: string): void;
 
 	resetAllModifiedFlags(): void;
