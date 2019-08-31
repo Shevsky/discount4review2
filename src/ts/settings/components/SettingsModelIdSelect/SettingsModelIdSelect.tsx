@@ -40,7 +40,7 @@ export default class SettingsModelIdSelect extends ContextComponent<ISettingsMod
 				<Field label={this.label} hint={this.hint} appendTop>
 					{renderedSelect}
 
-					{!this.is_general && this.has_modifies && (
+					{!this.is_general && this.has_differences && (
 						<>
 							<Link onClick={this.handleClickReset} className={linkClass}>
 								Сбросить настройки до общих
@@ -58,8 +58,8 @@ export default class SettingsModelIdSelect extends ContextComponent<ISettingsMod
 		return this.model.id === '*';
 	}
 
-	get has_modifies(): boolean {
-		return this.model.hasModifies(this.model.id);
+	get has_differences(): boolean {
+		return this.model.hasDifferences('*', this.model.id);
 	}
 
 	private get model(): ISettingsModel {
@@ -110,7 +110,7 @@ export default class SettingsModelIdSelect extends ContextComponent<ISettingsMod
 			},
 			...this.params.storefronts.map(storefront => ({
 				value: storefront.id,
-				label: `${this.model.hasModifies(storefront.id) ? '* ' : ''}${storefront.id}`
+				label: `${this.model.hasDifferences('*', storefront.id) ? '* ' : ''}${storefront.id}`
 			}))
 		];
 	}
