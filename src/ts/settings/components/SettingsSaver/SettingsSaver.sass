@@ -5,8 +5,25 @@
 	&__button-box
 
 	&__status-box
-		display: none
+		display: flex
+		align-items: center
 		margin-left: 10px
+		opacity: 0
+		pointer-events: none
+		transition: opacity .3s ease-out
 
 		&_visible
-			display: block
+			opacity: 1
+			pointer-events: auto
+			transition: none
+
+		&_error
+			color: #f00
+			font-weight: bold
+
+		&_success
+			color: #080
+			font-weight: bold
+
+	&__status-box-icon
+		margin-right: 5px !important
