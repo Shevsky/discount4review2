@@ -66,7 +66,7 @@ class SettingRetransformerUtil
 	{
 		if (is_array($value))
 		{
-			return json_encode($value);
+			return json_encode($value, JSON_FORCE_OBJECT);
 		}
 
 		return '{}';
