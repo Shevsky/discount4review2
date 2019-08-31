@@ -81,7 +81,7 @@ abstract class SettingsAccess extends waModel implements ISettingsAccess
 			}
 			else
 			{
-				$this->insert($data, 1);
+				$this->insert($identified_data, 1);
 			}
 		}
 	}
