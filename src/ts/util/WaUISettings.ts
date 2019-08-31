@@ -19,7 +19,13 @@ export namespace WaUISetttings {
 		}
 
 		if (Array.isArray(value)) {
-			value = {};
+			const object_value = {};
+
+			value.forEach((value_value, value_index) => {
+				object_value[value_index] = value_value;
+			});
+
+			value = object_value;
 		}
 
 		return { ...value };
