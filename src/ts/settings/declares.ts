@@ -46,6 +46,10 @@ interface IUserGroup {
 	};
 }
 
+interface IIntegrationAvailability {
+	flexdiscount: boolean;
+}
+
 interface IGlobalParams {
 	plugin_url: string;
 	save_settings_url: string;
@@ -54,4 +58,5 @@ interface IGlobalParams {
 	currencies: ICurrency[];
 	user_groups: IUserGroup[];
 	is_review_images_allowed: boolean;
+	integration_availability: IIntegrationAvailability;
 }
