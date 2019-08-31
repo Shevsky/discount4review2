@@ -2,8 +2,15 @@
 
 namespace Shevsky\Discount4Review\Persistence\Settings;
 
+use Shevsky\Discount4Review\Persistence\Access\ISettingsAccess;
+
 interface ISettingsStorage
 {
+	/**
+	 * @return ISettingsAccess
+	 */
+	public function getAccess();
+
 	/**
 	 * @return ISettingsItem[] = [
 	 *  $name => ISettingsItem

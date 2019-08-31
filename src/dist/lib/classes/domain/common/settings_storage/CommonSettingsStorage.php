@@ -31,6 +31,14 @@ abstract class CommonSettingsStorage implements ISettingsStorage
 	}
 
 	/**
+	 * @return ISettingsAccess
+	 */
+	public function getAccess()
+	{
+		return $this->access;
+	}
+
+	/**
 	 * @return SettingsService
 	 * @throws Exception
 	 */
