@@ -31,5 +31,11 @@ return [
 	'bonus.image_bonus_value' => 0,
 	'bonus.image_bonus_per_1_value' => 0,
 
+	'orders_availability.from_date' => '2018-01-01',
+	'orders_availability.state_ids' => ['completed' => true],
+	'orders_availability.is_for_latest' => false,
+	'orders_availability.products_min_count' => 1,
+	'orders_availability.order_sum_min' => 0,
+
 	'my_order.auto_inject_status' => true
 ];
