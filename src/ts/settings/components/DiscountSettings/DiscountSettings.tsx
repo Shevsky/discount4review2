@@ -178,7 +178,13 @@ export default class DiscountSettings extends ContextComponent {
 		return coupon_type_options;
 	}
 
+	get coupon_integration_ids(): string[] {
+		return ['shop_coupons', 'flexdiscount'];
+	}
+
 	get is_coupons_unavailable(): boolean {
-		return Object.values(this.params.integration_availability).every(availability => !availability);
+		return Object.entries(this.params.integration_availability)
+			.filter(([id]) => this.coupon_integration_ids.includes(id))
+			.every(([id, availability]) => !availability);
 	}
 }
