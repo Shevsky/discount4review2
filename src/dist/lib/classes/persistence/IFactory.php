@@ -5,7 +5,9 @@ namespace Shevsky\Discount4Review\Persistence;
 use Shevsky\Discount4Review\Persistence\Access\ICurrency;
 use Shevsky\Discount4Review\Persistence\Access\IUserGroup;
 use Shevsky\Discount4Review\Persistence\Order\IOrder;
+use Shevsky\Discount4Review\Persistence\Order\IOrderAction;
 use Shevsky\Discount4Review\Persistence\Order\IOrderItem;
+use Shevsky\Discount4Review\Persistence\Order\IOrderState;
 use Shevsky\Discount4Review\Persistence\Product\IProduct;
 use Shevsky\Discount4Review\Persistence\Product\ISku;
 use Shevsky\Discount4Review\Persistence\Review\IReview;
@@ -42,6 +44,18 @@ interface IFactory
 	 * @return IOrderItem
 	 */
 	public function createOrderItem($data);
+
+	/**
+	 * @param mixed $data
+	 * @return IOrderState
+	 */
+	public function createOrderState($data);
+
+	/**
+	 * @param mixed $data
+	 * @return IOrderAction
+	 */
+	public function createOrderAction($data);
 
 	/**
 	 * @param mixed $data

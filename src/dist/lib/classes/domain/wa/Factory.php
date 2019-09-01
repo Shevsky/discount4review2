@@ -6,7 +6,9 @@ use Exception;
 use Shevsky\Discount4Review\Domain\Wa\Access\Currency;
 use Shevsky\Discount4Review\Domain\Wa\Access\UserGroup;
 use Shevsky\Discount4Review\Domain\Wa\Order\Order;
+use Shevsky\Discount4Review\Domain\Wa\Order\OrderAction;
 use Shevsky\Discount4Review\Domain\Wa\Order\OrderItem;
+use Shevsky\Discount4Review\Domain\Wa\Order\OrderState;
 use Shevsky\Discount4Review\Domain\Wa\Review\Review;
 use Shevsky\Discount4Review\Persistence\Access\ICurrency;
 use Shevsky\Discount4Review\Persistence\Access\IUserGroup;
@@ -14,7 +16,9 @@ use Shevsky\Discount4Review\Persistence\IFactory;
 use Shevsky\Discount4Review\Domain\Wa\Product\Product;
 use Shevsky\Discount4Review\Domain\Wa\Product\Sku;
 use Shevsky\Discount4Review\Persistence\Order\IOrder;
+use Shevsky\Discount4Review\Persistence\Order\IOrderAction;
 use Shevsky\Discount4Review\Persistence\Order\IOrderItem;
+use Shevsky\Discount4Review\Persistence\Order\IOrderState;
 use Shevsky\Discount4Review\Persistence\Product\IProduct;
 use Shevsky\Discount4Review\Persistence\Review\IReview;
 
@@ -91,6 +95,24 @@ class Factory implements IFactory
 	public function createOrderItem($data)
 	{
 		return new OrderItem($data);
+	}
+
+	/**
+	 * @param mixed $data
+	 * @return IOrderState
+	 */
+	public function createOrderState($data)
+	{
+		return new OrderState($data);
+	}
+
+	/**
+	 * @param mixed $data
+	 * @return IOrderAction
+	 */
+	public function createOrderAction($data)
+	{
+		return new OrderAction($data);
 	}
 
 	/**
