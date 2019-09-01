@@ -8,6 +8,8 @@ import { observer } from 'mobx-react';
 import { ISelectOption } from 'lib/waui/Select/Select';
 import SettingsModelIdSelect from 'settings/components/SettingsModelIdSelect/SettingsModelIdSelect';
 import FieldGroup from '../../../../dist/lib/classes/domain/wa/FieldGroup/FieldGroup';
+import Hint from 'lib/waui/Hint/Hint';
+import InlineLink from 'lib/waui/InlineLink/InlineLink';
 
 @observer
 export default class DiscountSettings extends ContextComponent {
@@ -21,15 +23,27 @@ export default class DiscountSettings extends ContextComponent {
 				</Field>
 
 				<FieldGroup title="Купоны">
-					{this.coupon_type_options.length > 1 && (
-						<Field label="Тип купонов">
-							<StorefrontSelect
-								options={this.coupon_type_options}
-								name="discount.coupon_type"
-								short
-							/>
-						</Field>
-					)}
+					<Field
+						label="Тип купонов"
+						hint={
+							this.is_coupons_unavailable && (
+								<Hint paddedBottom error>
+									Скидки по купонам отключены.{' '}
+									<InlineLink href="?action=settings#/discounts/coupons/">
+										Включите их в настройках магазина
+									</InlineLink>
+									, чтобы использовать функционал плагина.
+								</Hint>
+							)
+						}
+						appendTop
+					>
+						<StorefrontSelect
+							options={this.coupon_type_options}
+							name="discount.coupon_type"
+							disabled={this.is_coupons_unavailable}
+						/>
+					</Field>
 
 					<Field label="Количество символов в купоне">
 						<StorefrontInputText name="discount.coupon_length" type="int" short />
@@ -148,7 +162,7 @@ export default class DiscountSettings extends ContextComponent {
 	get coupon_type_options(): ISelectOption[] {
 		const coupon_type_options = [
 			{
-				value: 'default',
+				value: 'shop_coupons',
 				label: 'Купоны магазина'
 			}
 		];
@@ -161,5 +175,9 @@ export default class DiscountSettings extends ContextComponent {
 		}
 
 		return coupon_type_options;
+	}
+
+	get is_coupons_unavailable(): boolean {
+		return Object.values(this.params.integration_availability).every(availability => !availability);
 	}
 }
