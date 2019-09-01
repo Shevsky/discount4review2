@@ -73,7 +73,9 @@ class shopDiscount4reviewPluginSettingsAction extends waViewAction
 		$params['is_review_images_allowed'] = $this->context->getSystemEnv()->isReviewImagesAllowed();
 
 		$params['integration_availability'] = [
-			'flexdiscount' => $this->context->getIntegrationPool()->isAvailableIntegration('flexdiscount')
+			'shop_coupons' => $this->context->getIntegrationPool()->isAvailableIntegration('shop_coupons'),
+			'shop_affiliate' => $this->context->getIntegrationPool()->isAvailableIntegration('shop_affiliate'),
+			'flexdiscount' => $this->context->getIntegrationPool()->isAvailableIntegration('flexdiscount'),
 		];
 
 		$this->view->assign('params', $params);

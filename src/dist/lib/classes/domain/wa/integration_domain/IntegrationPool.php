@@ -19,7 +19,15 @@ class IntegrationPool implements IIntegrationPool
 	{
 		if (!isset($this->pool[$name]))
 		{
-			if ($name === 'flexdiscount')
+			if ($name === 'shop_coupons')
+			{
+				$integration = new ShopCouponsIntegration();
+			}
+			elseif ($name === 'shop_affiliate')
+			{
+				$integration = new ShopAffiliateIntegration();
+			}
+			elseif ($name === 'flexdiscount')
 			{
 				$integration = new FlexDiscountIntegration();
 			}
