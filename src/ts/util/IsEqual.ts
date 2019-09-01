@@ -1,3 +1,3 @@
-import IsEqual from 'lodash.isequal';
+const IsEqual = require('lodash.isequal');
 
 export default IsEqual;
