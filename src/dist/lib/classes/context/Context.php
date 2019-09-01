@@ -10,6 +10,7 @@ use Shevsky\Discount4Review\Domain\Wa\Factory;
 use Shevsky\Discount4Review\Domain\Wa\IntegrationDomain\IntegrationPool;
 use Shevsky\Discount4Review\Domain\Wa\Registry\CurrencyRegistry;
 use Shevsky\Discount4Review\Domain\Wa\Registry\UserGroupRegistry;
+use Shevsky\Discount4Review\Domain\Wa\Registry\WorkflowRegistry;
 use Shevsky\Discount4Review\Domain\Wa\Util\EventUtil;
 use Shevsky\Discount4Review\Domain\Wa\Util\RoutingUtil;
 use Shevsky\Discount4Review\Service\FrontendService;
@@ -34,6 +35,7 @@ class Context
 	private $frontend_service;
 	private $integration_pool;
 	private $currency_registry;
+	private $workflow_registry;
 	private $user_group_registry;
 	private $routing_util;
 	private $event_util;
@@ -190,6 +192,19 @@ class Context
 		}
 
 		return $this->currency_registry;
+	}
+
+	/**
+	 * @return WorkflowRegistry
+	 */
+	public function getWorkflowRegistry()
+	{
+		if (!isset($this->workflow_registry))
+		{
+			$this->workflow_registry = new WorkflowRegistry($this->getFactory());
+		}
+
+		return $this->workflow_registry;
 	}
 
 	/**
