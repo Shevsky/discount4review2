@@ -26,7 +26,6 @@ export default class SettingsModelIdSelect extends ContextComponent<ISettingsMod
 
 		const renderedSelect = (
 			<Select
-				widthAuto
 				{...props}
 				className={settingsModelIdSelectClass}
 				options={this.options}
