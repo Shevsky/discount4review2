@@ -7,7 +7,7 @@ import StorefrontSelect from 'lib/control/domain/StorefrontSelect/StorefrontSele
 import { observer } from 'mobx-react';
 import { ISelectOption } from 'lib/waui/Select/Select';
 import SettingsModelIdSelect from 'settings/components/SettingsModelIdSelect/SettingsModelIdSelect';
-import FieldGroup from '../../../../dist/lib/classes/domain/wa/FieldGroup/FieldGroup';
+import FieldGroup from 'lib/waui/FieldGroup/FieldGroup';
 import Hint from 'lib/waui/Hint/Hint';
 import InlineLink from 'lib/waui/InlineLink/InlineLink';
 
@@ -32,7 +32,7 @@ export default class DiscountSettings extends ContextComponent {
 									<InlineLink href="?action=settings#/discounts/coupons/">
 										Включите их в настройках магазина
 									</InlineLink>
-									, чтобы использовать функционал плагина.
+									, чтобы использовать функционал плагина по выдаче купонов на скидку за отзывы.
 								</Hint>
 							)
 						}
