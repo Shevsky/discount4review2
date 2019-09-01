@@ -36,7 +36,7 @@ export default class SettingsModelIdSelect extends ContextComponent<ISettingsMod
 
 		if (fieldWrapped) {
 			return (
-				<Field label={this.label} hint={this.hint} appendTop>
+				<Field label={this.label} hint={this.hint}>
 					{renderedSelect}
 
 					{!this.is_general && this.has_differences && (

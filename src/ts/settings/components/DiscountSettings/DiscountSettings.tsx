@@ -35,7 +35,6 @@ export default class DiscountSettings extends ContextComponent {
 							</Hint>
 						)
 					}
-					appendTop
 				>
 					<StorefrontSelect
 						options={this.coupon_type_options}
@@ -77,7 +76,6 @@ export default class DiscountSettings extends ContextComponent {
 					<Field
 						label="Индивидуальные значения скидки"
 						hint="Включает индивидуальные значения размера скидки, зависящие от группы пользователя"
-						appendTop
 					>
 						<StorefrontCheckbox name="discount.individual_status" />
 					</Field>
@@ -142,7 +140,6 @@ export default class DiscountSettings extends ContextComponent {
 						<Field
 							label="Бонус за фотографии в отзывах"
 							hint="Выдается при наличии хотя бы 1 фотографии в отзывах"
-							appendTop
 						>
 							<StorefrontInputText name="discount.image_bonus_value" type="float" short />{' '}
 							<StorefrontSelect

@@ -8,7 +8,7 @@ const Field = ({
 	hint,
 	description,
 	children,
-	appendTop = false,
+	appendCenter = false,
 	required = false,
 	vertical = false,
 	short = false
@@ -18,14 +18,14 @@ const Field = ({
 	description?: string;
 	label?: string;
 	children: any;
-	appendTop?: boolean;
+	appendCenter?: boolean;
 	required?: boolean;
 	vertical?: boolean;
 	short?: boolean;
 }): ReactElement<any> => {
 	const fieldClass = ClassNames(Styles.field, {
 		[className]: !!className,
-		[Styles.field_appendTop]: appendTop,
+		[Styles.field_appendCenter]: appendCenter,
 		[Styles.field_vertical]: vertical,
 		[Styles.field_short]: short,
 		[Styles.field_required]: required

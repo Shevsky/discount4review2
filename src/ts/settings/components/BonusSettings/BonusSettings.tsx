@@ -35,7 +35,6 @@ export default class BonusSettings extends ContextComponent {
 							</Hint>
 						)
 					}
-					appendTop
 				>
 					<StorefrontSelect
 						options={this.bonus_type_options}
@@ -61,7 +60,6 @@ export default class BonusSettings extends ContextComponent {
 					<Field
 						label="Индивидуальные размеры бонусов"
 						hint="Включает индивидуальные значения размера бонусов, зависящие от группы пользователя"
-						appendTop
 					>
 						<StorefrontCheckbox name="bonus.individual_status" />
 					</Field>
@@ -119,7 +117,6 @@ export default class BonusSettings extends ContextComponent {
 						<Field
 							label="Баллов за фотографии в отзывах"
 							hint="Выдается при наличии хотя бы 1 фотографии в отзывах"
-							appendTop
 						>
 							<StorefrontInputText name="bonus.image_bonus_value" type="float" short />{' '}
 						</Field>
