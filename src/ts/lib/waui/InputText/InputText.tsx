@@ -10,6 +10,7 @@ export interface IInputTextProps {
 	refNode?: RefObject<any>;
 	type?: TInputTextType;
 	short?: boolean;
+	middle?: boolean;
 	allowEmpty?: boolean;
 	allowedSymbols?: string;
 	[prop: string]: any;
@@ -39,6 +40,7 @@ export default class InputText extends Component<IInputTextPropsFinal, IInputTex
 			className,
 			refNode,
 			short = false,
+			middle = false,
 			allowEmpty,
 			allowedSymbols,
 			params,
@@ -46,7 +48,8 @@ export default class InputText extends Component<IInputTextPropsFinal, IInputTex
 		} = this.props;
 		const inputClass = ClassNames(Styles.inputText, {
 			[className]: !!className,
-			[Styles.inputText_short]: short
+			[Styles.inputText_short]: short,
+			[Styles.inputText_middle]: middle
 		});
 
 		return (
