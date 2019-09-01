@@ -11,6 +11,7 @@ const InlineLink = ({
 	...props
 }: {
 	className?: string;
+	href?: string;
 	children: any;
 	icon?: {
 		name: string;
