@@ -5,6 +5,7 @@ namespace Shevsky\Discount4Review\Domain\Common\SettingsConfig;
 use Shevsky\Discount4Review\Persistence\Settings\ISettingsConfig;
 use Shevsky\Discount4Review\Persistence\Settings\ISettingsConfigItem;
 use Shevsky\Discount4Review\Persistence\Settings\ISettingsConfigIterator;
+use Shevsky\Discount4Review\Util\CommonUtil;
 use Shevsky\Discount4Review\Util\IncludeUtil;
 
 /**
@@ -51,6 +52,10 @@ class SettingsConfig implements ISettingsConfig
 		foreach ($this->settings_specification as $name => $value)
 		{
 			$type = gettype($value);
+			if ($type === 'array' && CommonUtil::isAssocArray($value))
+			{
+				$type = 'object';
+			}
 
 			$this->config_items[$name] = new SettingsConfigItem($name, $value, $type);
 		}
