@@ -8,6 +8,7 @@ const Hint = ({
 	paddedLeft = false,
 	paddedBottom = false,
 	likeHeader = false,
+	error = false,
 	className = ''
 }): ReactElement<any> => {
 	const hintClass = ClassNames(Styles.hint, {
@@ -15,6 +16,7 @@ const Hint = ({
 		[Styles.hint_paddedLeft]: paddedLeft,
 		[Styles.hint_paddedBottom]: paddedBottom,
 		[Styles.hint_likeHeader]: likeHeader,
+		[Styles.hint_error]: error,
 		[className]: !!className
 	});
 
