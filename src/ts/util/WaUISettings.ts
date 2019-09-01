@@ -9,8 +9,8 @@ export namespace WaUISetttings {
 	}
 
 	export interface IArrayAccess {
-		index: number;
-		defaultValue?: string | number;
+		index: string | number;
+		defaultValue?: string | number | boolean;
 	}
 
 	export const ArrayAccessPrepare = (name: string, value: any) => {
