@@ -47,6 +47,8 @@ interface IUserGroup {
 }
 
 interface IIntegrationAvailability {
+	shop_coupons: boolean;
+	shop_affiliate: boolean;
 	flexdiscount: boolean;
 }
 
