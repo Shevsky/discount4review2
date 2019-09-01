@@ -22,29 +22,29 @@ export default class DiscountSettings extends ContextComponent {
 					<StorefrontCheckbox name="discount.status" />
 				</Field>
 
-				<FieldGroup title="Купоны">
-					<Field
-						label="Тип купонов"
-						hint={
-							this.is_coupons_unavailable && (
-								<Hint paddedBottom error>
-									Скидки по купонам отключены.{' '}
-									<InlineLink href="?action=settings#/discounts/coupons/">
-										Включите их в настройках магазина
-									</InlineLink>
-									, чтобы использовать функционал плагина по выдаче купонов на скидку за отзывы.
-								</Hint>
-							)
-						}
-						appendTop
-					>
-						<StorefrontSelect
-							options={this.coupon_type_options}
-							name="discount.coupon_type"
-							disabled={this.is_coupons_unavailable}
-						/>
-					</Field>
+				<Field
+					label="Тип купонов"
+					hint={
+						this.is_coupons_unavailable && (
+							<Hint paddedBottom error>
+								Скидки по купонам отключены.{' '}
+								<InlineLink href="?action=settings#/discounts/coupons/">
+									Включите их в настройках магазина
+								</InlineLink>
+								, чтобы использовать функционал плагина по выдаче купонов на скидку за отзывы.
+							</Hint>
+						)
+					}
+					appendTop
+				>
+					<StorefrontSelect
+						options={this.coupon_type_options}
+						name="discount.coupon_type"
+						disabled={this.is_coupons_unavailable}
+					/>
+				</Field>
 
+				<FieldGroup title="Купоны">
 					<Field label="Количество символов в купоне">
 						<StorefrontInputText name="discount.coupon_length" type="int" short />
 					</Field>
@@ -59,9 +59,19 @@ export default class DiscountSettings extends ContextComponent {
 				</FieldGroup>
 
 				<FieldGroup title="Параметры скидок">
-					<Field label="Размер скидки">
+					<Field label="Фиксированный размер скидки">
 						<StorefrontInputText name="discount.value" type="float" short />{' '}
 						<StorefrontSelect options={this.discount_unit_options} name="discount.unit" short />
+					</Field>
+
+					<Field label="Бонус за каждый отзыв">
+						<StorefrontInputText name="discount.per_1_value" type="int" short />{' '}
+						<StorefrontSelect
+							options={this.discount_unit_options}
+							name="discount.per_1_unit"
+							short
+						/>{' '}
+						за каждый 1 отзыв
 					</Field>
 
 					<Field
@@ -98,7 +108,28 @@ export default class DiscountSettings extends ContextComponent {
 												defaultValue: this.default_discount_unit
 											}}
 											short
-										/>
+										/>{' '}
+										+{' '}
+										<StorefrontInputText
+											name="discount.individual_per_1_value"
+											type="float"
+											arrayAccess={{
+												index: user_group.id,
+												defaultValue: ''
+											}}
+											allowEmpty
+											short
+										/>{' '}
+										<StorefrontSelect
+											options={this.discount_unit_options}
+											name="discount.individual_per_1_unit"
+											arrayAccess={{
+												index: user_group.id,
+												defaultValue: this.default_discount_per_1_unit
+											}}
+											short
+										/>{' '}
+										за каждый 1 отзыв
 									</Field>
 								))}
 							</Field>
@@ -109,8 +140,8 @@ export default class DiscountSettings extends ContextComponent {
 				{this.params.is_review_images_allowed && (
 					<FieldGroup title="Бонусы за фотографии к отзывам">
 						<Field
-							label="Бонус за фотографии в отзыве"
-							hint="Выдается при наличии хотя бы 1 фотографии в отзыве"
+							label="Бонус за фотографии в отзывах"
+							hint="Выдается при наличии хотя бы 1 фотографии в отзывах"
 							appendTop
 						>
 							<StorefrontInputText name="discount.image_bonus_value" type="float" short />{' '}
@@ -121,7 +152,7 @@ export default class DiscountSettings extends ContextComponent {
 							/>
 						</Field>
 
-						<Field label="Бонус за каждую фотографию в отзыве">
+						<Field label="Бонус за каждую фотографию в отзывах">
 							<StorefrontInputText name="discount.image_bonus_per_1_value" type="float" short />{' '}
 							<StorefrontSelect
 								options={this.discount_unit_options}
@@ -145,6 +176,10 @@ export default class DiscountSettings extends ContextComponent {
 
 	get default_discount_unit(): string {
 		return this.storefront_settings['discount.unit'];
+	}
+
+	get default_discount_per_1_unit(): string {
+		return this.storefront_settings['discount.per_1_unit'];
 	}
 
 	get discount_unit_options(): ISelectOption[] {

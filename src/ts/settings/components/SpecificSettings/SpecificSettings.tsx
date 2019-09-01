@@ -3,6 +3,7 @@ import ContextComponent from 'settings/context/ContextComponent';
 import Tabs from 'lib/control/domain/Tabs/Tabs';
 import Tab from 'lib/waui/Tab/Tab';
 import DiscountSettings from 'settings/components/DiscountSettings/DiscountSettings';
+import BonusSettings from 'settings/components/BonusSettings/BonusSettings';
 
 export default class SpecificSettings extends ContextComponent {
 	render(): ReactNode {
@@ -13,7 +14,9 @@ export default class SpecificSettings extends ContextComponent {
 						<DiscountSettings />
 					</Tab>
 
-					<Tab label="Бонусы">bonuses</Tab>
+					<Tab label="Бонусы">
+						<BonusSettings />
+					</Tab>
 				</Tabs>
 			</div>
 		);
