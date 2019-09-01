@@ -5,6 +5,8 @@ use Shevsky\Discount4Review\Persistence\Access\ICurrency;
 use Shevsky\Discount4Review\Persistence\Access\IStorefront;
 use Shevsky\Discount4Review\Persistence\Access\ITheme;
 use Shevsky\Discount4Review\Persistence\Access\IUserGroup;
+use Shevsky\Discount4Review\Persistence\Order\IOrderAction;
+use Shevsky\Discount4Review\Persistence\Order\IOrderState;
 use Shevsky\Discount4Review\Persistence\Settings\ISettingsItem;
 
 class shopDiscount4reviewPluginSettingsAction extends waViewAction
@@ -61,13 +63,28 @@ class shopDiscount4reviewPluginSettingsAction extends waViewAction
 			[__CLASS__, 'themeToArray'],
 			$this->context->getEnv()->getThemes()
 		);
-		$params['currencies'] = array_map(
-			[__CLASS__, 'currencyToArray'],
-			$this->context->getEnv()->getCurrencies()
-		);
+		try
+		{
+			$params['currencies'] = array_map(
+				[__CLASS__, 'currencyToArray'],
+				$this->context->getEnv()->getCurrencies()
+			);
+		}
+		catch (Exception $e)
+		{
+			$params['currencies'] = [];
+		}
 		$params['user_groups'] = array_map(
 			[__CLASS__, 'userGroupToArray'],
 			$this->context->getEnv()->getUserGroups()
+		);
+		$params['states'] = array_map(
+			[__CLASS__, 'stateToArray'],
+			$this->context->getWorkflowRegistry()->getStates()
+		);
+		$params['actions'] = array_map(
+			[__CLASS__, 'actionToArray'],
+			$this->context->getWorkflowRegistry()->getActions()
 		);
 
 		$params['is_review_images_allowed'] = $this->context->getSystemEnv()->isReviewImagesAllowed();
@@ -133,6 +150,24 @@ class shopDiscount4reviewPluginSettingsAction extends waViewAction
 	private function userGroupToArray(IUserGroup $user_group)
 	{
 		return $user_group->toArray();
+	}
+
+	/**
+	 * @param IOrderState $state
+	 * @return mixed[]
+	 */
+	private function stateToArray(IOrderState $state)
+	{
+		return $state->toArray();
+	}
+
+	/**
+	 * @param IOrderAction $action
+	 * @return mixed[]
+	 */
+	private function actionToArray(IOrderAction $action)
+	{
+		return $action->toArray();
 	}
 
 	/**

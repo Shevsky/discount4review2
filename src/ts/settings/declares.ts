@@ -46,6 +46,18 @@ interface IUserGroup {
 	};
 }
 
+interface IOrderState {
+	id: string;
+	name: string;
+	color: string;
+	icon: string;
+}
+
+interface IOrderAction {
+	id: string;
+	name: string;
+}
+
 interface IIntegrationAvailability {
 	shop_coupons: boolean;
 	shop_affiliate: boolean;
@@ -59,6 +71,8 @@ interface IGlobalParams {
 	themes: ITheme[];
 	currencies: ICurrency[];
 	user_groups: IUserGroup[];
+	states: IOrderState[];
+	actions: IOrderAction[];
 	is_review_images_allowed: boolean;
 	integration_availability: IIntegrationAvailability;
 }
