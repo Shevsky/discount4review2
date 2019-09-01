@@ -111,6 +111,7 @@ export default class DiscountSettings extends ContextComponent {
 						<Field
 							label="Бонус за фотографии в отзыве"
 							hint="Выдается при наличии хотя бы 1 фотографии в отзыве"
+							appendTop
 						>
 							<StorefrontInputText name="discount.image_bonus_value" type="float" short />{' '}
 							<StorefrontSelect
