@@ -15,7 +15,8 @@ class JsonUtil
 	{
 		$encoded_value = json_encode($value);
 
-		if (is_string($encoded_value)) {
+		if (is_string($encoded_value))
+		{
 			return $encoded_value;
 		}
 
@@ -31,7 +32,8 @@ class JsonUtil
 	{
 		$decoded_value = json_decode($json, true);
 
-		if ($decoded_value === null || json_last_error() !== JSON_ERROR_NONE) {
+		if ($decoded_value === null || json_last_error() !== JSON_ERROR_NONE)
+		{
 			throw new Exception("Не удалось раскодировать как JSON-строку: " . json_last_error_msg());
 		}
 
