@@ -1,6 +1,5 @@
-import { observable, observe } from 'util/mobx';
+import { observable, observe, IObjectDidChange } from 'util/mobx';
 import WaRequest from 'util/WaRequest';
-import { IObjectDidChange } from 'mobx';
 
 export namespace SettingsSave {
 	export interface IModels {
