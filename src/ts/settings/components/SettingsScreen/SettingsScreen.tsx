@@ -7,7 +7,7 @@ import GeneralSettings from 'settings/components/GeneralSettings/GeneralSettings
 import Header from 'lib/waui/Header/Header';
 import { observer } from 'mobx-react';
 import SpecificSettings from 'settings/components/SpecificSettings/SpecificSettings';
-import SettingsSaver from 'settings/components/SettingsSaver/SettingsSaver';
+import SettingsBar from 'settings/components/SettingsBar/SettingsBar';
 
 interface ISettingsScreenProps {
 	contextData: ContextData;
@@ -27,7 +27,7 @@ export default class SettingsScreen extends Component<ISettingsScreenProps> {
 
 					<SpecificSettings />
 
-					<SettingsSaver />
+					<SettingsBar />
 				</Context.Provider>
 			</div>
 		);
